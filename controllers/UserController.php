@@ -10,11 +10,10 @@ class UserController extends RenderView
     {
         $id_user = $id[0];
 
-        $users = new User();
 
-        $this->loadView('user', [
+        $this->loadView('users', [
             'title' => 'Usuário',
-            'user' => $users->fetchId($id)
+            'user' =>  $id
         ]);
     }
 }
