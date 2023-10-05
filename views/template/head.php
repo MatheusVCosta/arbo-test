@@ -8,5 +8,6 @@ $config = new Config();
     <title><?php echo $config->get_sentings()->PROJECT_NAME; ?></title>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="public/style.css">
+    <link rel="stylesheet" href="public/checkbox.css">
     <link rel="stylesheet" href="views/assets/css/style.css">
 </head>
