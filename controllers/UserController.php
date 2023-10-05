@@ -1,6 +1,6 @@
 <?php
 
-class UserController
+class UserController extends RenderView
 {
     public function index()
     {
@@ -8,6 +8,13 @@ class UserController
 
     public function show($id)
     {
-        echo "User" . $id[0];
+        $id_user = $id[0];
+
+        $users = new User();
+
+        $this->loadView('user', [
+            'title' => 'Usuário',
+            'user' => $users->fetchId($id)
+        ]);
     }
 }
