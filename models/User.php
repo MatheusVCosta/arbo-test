@@ -33,6 +33,30 @@ class User extends Database
         return $stm->fetch(PDO::FETCH_ASSOC);
     }
 
+    public function login($email, $password)
+    {
+        // $password_decrypy = password_verify();
+        $sqlLogin = "SELECT * FROM user where email = ?";
+        $stm = $this->pdo->prepare($sqlLogin);
+        $user = $stm->execute([$email]);
+        $user = $stm->fetch(PDO::FETCH_ASSOC);
+
+        if (empty($user)) {
+            $ex = new Exception("Usuário ou senha invalido!", 403);
+            return $ex;
+            exit;
+        }
+
+        if (!password_verify($password, $user['password'])) {
+            $ex = new Exception("Usuário ou senha invalido!", 403);
+            return $ex;
+            exit;
+        }
+
+        return  $user;
+    }
+
+
     public function insert($user)
     {
         $user['password'] = encrypt_password($user['password']);
@@ -46,6 +70,8 @@ class User extends Database
         return $result;
     }
 
+
+    // METHODS UTILS
     public function setArrayForUser(array $user_array)
     {
         if (!isset($user_array) || empty($user_array)) {

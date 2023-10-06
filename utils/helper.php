@@ -63,8 +63,33 @@ function _exception_response_json($ex, $args = [])
         'trace'      => $ex->getTrace(),
     ];
     $exception = array_merge($exception, $args);
-    http_response_code(500);
+    http_response_code($ex->getCode());
     header('Content-type: application/json');
     print(json_encode($exception));
+    return json_encode($exception);
     exit;
+}
+
+
+function _http_response_json($args = [])
+{
+    http_response_code(200);
+    header('Content-type: application/json');
+    print(json_encode($args));
+    exit;
+}
+
+function _create_auth_session($args = [])
+{
+    session_start();
+    $_SESSION['user_authenticated'] = [
+        'logged'   => true,
+        'userName'  => $args['name'],
+        'userEmail' => $args['email'],
+    ];
+}
+
+function _destroy_session()
+{
+    unset($_SESSION['user_authenticated']);
 }

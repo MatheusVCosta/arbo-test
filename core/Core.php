@@ -6,7 +6,6 @@ class Core
     {
         $url = '';
         $routerFound = false;
-
         $url = isset($_GET['url']) ? $url . $_GET['url'] : $url;
         $request_method = $_SERVER['REQUEST_METHOD'];
         ($url != '') ? $url = rtrim($url, '/') : $url;
@@ -16,11 +15,7 @@ class Core
             $url_bakup = "/";
             $url = "home";
         }
-
-        $url_exploded = explode('/', $url);
-        [$module, $operation] = count($url_exploded) > 1 ? $url_exploded : array_merge($url_exploded, ['']);
-
-        foreach ($routes[$module] as $k => $v) {
+        foreach ($routes as $k => $v) {
             if ($v['url'] != $url_bakup) {
                 continue;
             }
@@ -28,16 +23,16 @@ class Core
                 continue;
             }
             $pattern = '#^' . preg_replace('/{id}/', '(\w+)', $url) . '$#';
-
             if (preg_match($pattern, $url, $matches)) {
+
                 array_shift($matches);
                 [$currentController, $action] = explode('@', $v['controller']);
                 $routerFound = true;
-                require_once __DIR__ . "/../controllers/$currentController.php";
 
+                require_once __DIR__ . "/../controllers/$currentController.php";
                 //Ex: $newController = new "UserController()"
                 $newController = new $currentController();
-                $newController->$action($matches);
+                $r = $newController->$action();
             }
         }
 

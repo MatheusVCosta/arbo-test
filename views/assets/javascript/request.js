@@ -22,10 +22,11 @@ $("#btnSend").click((e) => {
     }
     $.ajax({
         type: "POST",
-        url: `${url_base}/user/insert`,
+        url: `${url_base}/user_insert`,
         data: data,
         success: function (response) {
-            window.location = `${url_base}/user/home`
+            console.log(response)
+            window.location = `${url_base}/user_index`
         },
         error: (response) => {
             console.log(response)
@@ -41,3 +42,27 @@ $("#btnSend").click((e) => {
         }
     })
 })
+
+$('#btnLogin').click((e) => {
+    e.preventDefault()
+
+    let txtEmail = $("#txtEmail").val();
+    let txtPassword = $("#txtPassword").val();
+
+    let data = {
+        'txtEmail': txtEmail,
+        'txtPassword': txtPassword,
+    }
+    $.ajax({
+        type: "POST",
+        url: `${url_base}/user_auth`,
+        data: data,
+        success: function (response) {
+            console.log(response)
+            window.location = `${url_base}/user_index`
+        },
+        error: (response) => {
+            console.log(response)
+        }
+    })
+}) 

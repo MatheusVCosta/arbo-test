@@ -26,6 +26,16 @@ p {
     font-family: 'Lato', sans-serif;
 }
 
+a {
+    color: #fff;
+    text-decoration: none;
+}
+
+a:link {
+    color: #fff;
+    text-decoration: none;
+}
+
 form {
     display: flex;
     flex-direction: column;
@@ -192,6 +202,11 @@ footer,
     margin-left: 1rem;
 }
 
+/* margin-right */
+.mg-r-1 {
+    margin-right: 0.5rem;
+}
+
 /* margin-top */
 .mg-t-1 {
     margin-top: 1rem;
@@ -231,15 +246,15 @@ footer,
 /* width */
 
 .w-sm {
-    width: 30vw;
+    width: 30rem;
 }
 
 .w-md {
-    width: 70vw;
+    width: 70rem;
 }
 
 .w-bg {
-    width: 90vw;
+    width: 90rem;
 }
 
 .max-w-sm {

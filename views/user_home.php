@@ -1,1 +1,3 @@
-<h1>teste</h1>
+<?php echo 'tsd';
+session_start();
+print_r($_SESSION['user_authenticated']);
