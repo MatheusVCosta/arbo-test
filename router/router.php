@@ -1,6 +1,11 @@
 <?php
 
 $routes = [
+    // Home
     '/' => 'HomeController@index',
-    '/users/{id}' => 'UserController@show',
+
+    // User
+    '/user' => 'UserController@index',
+    '/user/insert' => 'UserController@insert',
+    '/user/{id}' => 'UserController@show',
 ];

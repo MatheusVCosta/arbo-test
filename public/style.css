@@ -181,6 +181,15 @@ footer,
 
 /* margin properties */
 
+.padding-1 {
+    padding: 1.2rem;
+}
+
+.padding-2 {
+    padding: 2.2rem;
+}
+
+
 /* flex properties */
 .flex-1 {
     flex: 1;

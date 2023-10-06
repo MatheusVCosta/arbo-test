@@ -1,12 +1,12 @@
 <?php
 
-class Config
+trait Config
 {
-    public $PROJECT_NAME;
-    private $DB_NAME;
-    private $DB_USER;
-    private $DB_PASSWORD;
-    private $DB_HOST;
+    protected $PROJECT_NAME;
+    protected $DB_NAME;
+    protected $DB_USER;
+    protected $DB_PASSWORD;
+    protected $DB_HOST;
 
     public function __construct()
     {
@@ -22,7 +22,7 @@ class Config
         $this->PROJECT_NAME = "Minha Casa Nova";
         $this->DB_NAME = "my_new_house_db";
         $this->DB_USER = "root";
-        $this->DB_PASSWORD = "root";
+        $this->DB_PASSWORD = "7274";
         $this->DB_HOST = "127.0.0.1";
 
         return $this;

@@ -1,10 +1,14 @@
 <?php
 
 require_once __DIR__ . '/core/Core.php';
-
+require_once __DIR__ . '/utils/helper.php';
 require_once __DIR__ . '/router/router.php';
 
 $load_template = "";
+
+ini_set('display_errors', 1);
+ini_set('display_startup_erros', 1);
+error_reporting(E_ALL);
 
 spl_autoload_register(function ($file) {
     require_once __DIR__ . '/core/Config.php';

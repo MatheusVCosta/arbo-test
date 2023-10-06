@@ -5,7 +5,7 @@
     <?php require_once("template/header.php") ?>
     <div id="app">
         <div class="container">
-            <div class="menu-left flex-1">
+            <div class="menu-left padding-1 flex-1">
                 <div class="row">
                     <strong>
                         <p class="text-color flex-1 text-size-2 text-center">Busca avançada</p>
@@ -17,7 +17,7 @@
                         <input type="text" class="input-text mg-1">
                     </div>
                 </div>
-                <div class="line"></div>
+                <span class="line"></span>
                 <div class="row">
                     <div class="content flex-1" style="max-width:160px">
                         <label class="text-size-1 mg-1">Valor minimo</label>

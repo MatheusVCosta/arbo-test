@@ -75,6 +75,8 @@ header {
 /* Style Home */
 
 .menu-left {
+    display: flex;
+    flex-direction: column;
     border-radius: 1px;
 }
 
