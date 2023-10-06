@@ -97,3 +97,12 @@ header {
 }
 
 /* Style Home */
+
+/* Style User */
+.btn-send {
+    background-color: #f26c4f;
+    border: none;
+    outline: none;
+}
+
+/* Style User */

@@ -2,17 +2,18 @@
 
 class UserController extends RenderView
 {
+    use Config;
     private $user;
 
     public function index()
     {
+        $config = $this->get_sentings();
         $this->user = new User();
 
         $users = $this->user->fetchAll();
 
         $this->loadView('user', [
-            'title' => 'Usuário',
-            'user' =>  $users[0]['name']
+            'config' => $config,
         ]);
     }
 
