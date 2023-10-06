@@ -5,6 +5,6 @@ class NotFoundController
     public function index()
     {
 
-        echo "Not Found";
+        echo "Not Found Controller";
     }
 }

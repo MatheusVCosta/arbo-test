@@ -4,24 +4,35 @@ class Core
 {
     public function run($routes)
     {
-        $url = '/';
-
-        isset($_GET['url']) ? $url .= $_GET['url'] : '';
-
-        ($url != '/') ? $url = rtrim($url, '/') : $url;
-
+        $url = '';
         $routerFound = false;
 
-        foreach ($routes as $path => $controller) {
+        $url = isset($_GET['url']) ? $url . $_GET['url'] : $url;
+        $request_method = $_SERVER['REQUEST_METHOD'];
+        ($url != '') ? $url = rtrim($url, '/') : $url;
 
-            $pattern = '#^' . preg_replace('/{id}/', '(\w+)', $path) . '$#';
+        $url_bakup = "/$url";
+        if ($url == "") {
+            $url_bakup = "/";
+            $url = "home";
+        }
+
+        $url_exploded = explode('/', $url);
+        [$module, $operation] = count($url_exploded) > 1 ? $url_exploded : array_merge($url_exploded, ['']);
+
+        foreach ($routes[$module] as $k => $v) {
+            if ($v['url'] != $url_bakup) {
+                continue;
+            }
+            if ($v['method'] != $request_method) {
+                continue;
+            }
+            $pattern = '#^' . preg_replace('/{id}/', '(\w+)', $url) . '$#';
+
             if (preg_match($pattern, $url, $matches)) {
-
                 array_shift($matches);
-                [$currentController, $action] = explode('@', $controller);
-
+                [$currentController, $action] = explode('@', $v['controller']);
                 $routerFound = true;
-
                 require_once __DIR__ . "/../controllers/$currentController.php";
 
                 //Ex: $newController = new "UserController()"

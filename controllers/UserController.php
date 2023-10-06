@@ -14,47 +14,57 @@ class UserController extends RenderView
 
         $this->loadView('user', [
             'config' => $config,
+            'teste'  => 'teste'
         ]);
     }
 
-    public function show($id)
+    public function register()
     {
-        $id_user = $id[0];
+        $config = $this->get_sentings();
+        $this->user = new User();
 
+        $users = $this->user->fetchAll();
 
-        $this->loadView('user', [
-            'title' => 'Usuário',
-            'user' =>  $id
+        $this->loadView('register_user', [
+            'config' => $config,
         ]);
     }
 
     public function insert()
     {
         $response = [];
+        $config = $this->get_sentings();
         $this->user = new User();
-        $user = $this->user->setArrayForUser([
-            'name' => "stefanne",
-            'email' => "stafanne@gmail.com",
-            'password' => "123",
-            'birth_date' => "12/11/2003",
-        ]);
 
-        $result = $this->user->insert($user);
-        if (!$result) {
-            $response = [
-                "message" => "Usuário não inserido!",
-                "status_code" => 500,
-            ];
-            throw new Exception("User not entered");
+        if (!empty($_POST)) {
+            $data  = $_POST;
+
+            $user = $this->user->setArrayForUser([
+                'name'       => $data['txtName'],
+                'email'      => $data['txtEmail'],
+                'password'   => $data['txtPassword'],
+                'birth_date' => "12/11/2003",
+            ]);
+
+            $result = $this->user->insert($user);
+            if (!$result) {
+                $response = [
+                    "message" => "Usuário não inserido!",
+                    "status_code" => 500,
+                ];
+                throw new Exception("User not entered");
+            } else {
+                $response = [
+                    "message" => "Usuário inserido com sucesso!",
+                    "status_code" => 201,
+                ];
+            }
+
+            // $this->loadView('register_user', [
+            //     'config' => $config,
+            // ]);
         } else {
-            $response = [
-                "message" => "Usuário inserido com sucesso!",
-                "status_code" => 201,
-            ];
+            header('Location: /test-arbo/arbo-test');
         }
-
-        $this->loadView('user', [
-            'response' => $response,
-        ]);
     }
 }

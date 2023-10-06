@@ -5,10 +5,10 @@ class User extends Database
     private $pdo;
 
     private $rules_user = [
-        'name' => ['not_null', 'str'],
-        'email' => ['not_null', 'str'],
-        'birth_date' => ['not_null', 'str'],
-        'password' => ['not_null', 'str'],
+        'name'          => ['not_null', 'str'],
+        'email'         => ['not_null', 'str'],
+        'birth_date'    => ['not_null', 'str'],
+        'password'      => ['not_null', 'str'],
     ];
 
     public function __construct()
@@ -48,13 +48,17 @@ class User extends Database
 
     public function setArrayForUser(array $user_array)
     {
-        if (!isset($user_array)) {
-            throw new Exception("Filds needs filled!");
+        if (!isset($user_array) || empty($user_array)) {
+            $ex = new Exception("Filds needs filled!", 500);
+            _exception_response_json($ex);
         }
 
         foreach ($user_array as $key => $value) {
             $this->$key = $value;
-            validate($key, $value, $this->rules_user);
+            $bool = validate($key, $value, $this->rules_user);
+            if (!$bool) {
+                // throw new Exception("Error!");
+            }
         }
         return array_merge($user_array, prepare_date_to_insert());
     }

@@ -154,5 +154,6 @@
 <footer>
     <?php require_once("template/footer.php") ?>
 </footer>
+<script src="views/assets/javascript/request.js"></script>
 
 </html>

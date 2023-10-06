@@ -40,14 +40,31 @@ function validate($key, $value, $rules_user)
 
 function _not_null($value, $field)
 {
-    if (!isset($value)) {
-        throw new Exception("The field '$field' not can null");
+    if (!isset($value) || empty($value)) {
+        $ex = new Exception("The field '$field' not can null", 500);
+        _exception_response_json($ex, ["field" => $field, "type_error" => "field_null"]);
     }
 }
 
 function _str($value, $field)
 {
     if (!is_string($value)) {
-        throw new Exception("The field '$field' need be string");
+        $ex = new Exception("The field '$field' not can null", 500);
+        _exception_response_json($ex);
     }
+}
+
+function _exception_response_json($ex, $args = [])
+{
+    $exception = [
+        'message'    => $ex->getMessage(),
+        'status'     => $ex->getCode(),
+        'line'       => $ex->getLine(),
+        'trace'      => $ex->getTrace(),
+    ];
+    $exception = array_merge($exception, $args);
+    http_response_code(500);
+    header('Content-type: application/json');
+    print(json_encode($exception));
+    exit;
 }
