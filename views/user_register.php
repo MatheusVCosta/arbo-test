@@ -4,7 +4,7 @@
 <body>
     <?php require_once("template/header.php") ?>
     <div id="app">
-        <div class="container direction-collum w-sm">
+        <div class="container direction-collum w-sm max-w-sm">
             <h1 class="text-center color-orange">Minha Casa Nova</h1>
             <p class="text-center">Venha! Anuncie sua casa hoje e pegue a chave amanhã</p>
             <div class="row">

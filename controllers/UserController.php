@@ -39,6 +39,13 @@ class UserController extends RenderView
         }
     }
 
+    public function user_logout()
+    {
+        session_start();
+        if ($_SESSION['user_authenticated']) {
+            _destroy_session('user_authenticated');
+        }
+    }
 
     public function index()
     {
@@ -57,9 +64,6 @@ class UserController extends RenderView
     public function register()
     {
         $config = $this->get_sentings();
-        $this->user = new User();
-
-        $users = $this->user->fetchAll();
 
         $this->loadView('user_register', [
             'config' => $config,
@@ -99,8 +103,11 @@ class UserController extends RenderView
                 ];
                 _http_response_json($response);
             }
-
-            $this->loadView('user_register', [
+            _create_auth_session(['name' => "teste", "email" => 'teste']);
+            if ($_SESSION['user_authenticated']) {
+                echo "oi";
+            }
+            $this->loadView('user_home', [
                 'config' => $config,
             ]);
         } else {

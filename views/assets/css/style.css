@@ -105,12 +105,45 @@ header {
     outline: none;
 }
 
-/* .teste {
-    background-color: #663399;
+.street-text {
+    font-size: 1.3em;
 }
 
-.info {
+.line {
+    width: 95%;
+    border-bottom: 1px solid #f26c4f;
+}
+
+.rooms {
+    width: 100px;
+    max-width: 120px;
+    height: 40px;
+
+    color: #fff;
+    background-color: #f26c4f;
+    border-radius: 10px;
+    display: flex;
     text-align: center;
-} */
+    justify-content: center;
+    align-items: center;
+    margin: 5px;
+}
+
+.rooms-row {
+    display: flex;
+    flex: 2;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: flex-end;
+}
+
+.app-home {
+    align-items: flex-start !important
+}
 
 /* Style User */
+
+
+.col {
+    flex-direction: column !important;
+}

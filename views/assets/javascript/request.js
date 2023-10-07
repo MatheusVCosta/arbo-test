@@ -7,7 +7,28 @@ const message_erros = {
     }
 }
 
+$("#uploadPhoto").click((e) => {
+    e.preventDefault()
 
+    form = $('#formFiles')[0]
+    formData = new FormData(form)
+    $.ajax({
+        url: `${url_base}/house_insert`,
+        type: "POST",
+        data: formData,
+        processData: false,
+        contentType: false,
+        success: (data) => {
+            console.log(data)
+            $("#messagem").append(`<img src='${data}'>`)
+            // $("#messagem").append("<img src='public/images/casa1.jpg' alt=''>")
+
+        },
+        error: (error) => {
+            console.log(error)
+        }
+    })
+})
 
 $("#btnSend").click((e) => {
     e.preventDefault()
@@ -26,7 +47,7 @@ $("#btnSend").click((e) => {
         data: data,
         success: function (response) {
             console.log(response)
-            window.location = `${url_base}/user_index`
+            // window.location = `${url_base}/user_index`
         },
         error: (response) => {
             console.log(response)
@@ -65,4 +86,18 @@ $('#btnLogin').click((e) => {
             console.log(response)
         }
     })
-}) 
+})
+
+$('#btnLogOut').click((e) => {
+    $.ajax({
+        type: "GET",
+        url: `${url_base}/user_logout`,
+        success: function (response) {
+            console.log(response)
+            window.location = `${url_base}/`
+        },
+        error: (response) => {
+            console.log(response)
+        }
+    })
+})

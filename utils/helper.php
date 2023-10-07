@@ -89,7 +89,7 @@ function _create_auth_session($args = [])
     ];
 }
 
-function _destroy_session()
+function _destroy_session($session_name)
 {
-    unset($_SESSION['user_authenticated']);
+    unset($_SESSION[$session_name]);
 }
