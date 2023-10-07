@@ -1,7 +1,7 @@
 <?php
-session_start();
-if (!$_SESSION['user_authenticated']) {
-    header('Location: /test-arbo/arbo-test');
+if (!isset($_SESSION['user_authenticated'])) {
+    print('sadas');
+    // header('Location: /test-arbo/arbo-test');
 }
 ?>
 <html>

@@ -8,10 +8,6 @@ class HouseController extends RenderView
     {
     }
 
-    public function register()
-    {
-    }
-
     public function renderInsertHouse()
     {
         $config = $this->get_sentings();
@@ -23,8 +19,60 @@ class HouseController extends RenderView
 
     public function insert()
     {
-        session_start();
         if ($_SESSION['user_authenticated']) {
+            $actualUser = $_SESSION['user_authenticated'];
+
+            $addressArray = [
+                'postal_code' => $_POST['txtPostalCode'],
+                'street'      => $_POST['txtStreet'],
+                'district'    => $_POST['txtDistrict'],
+                'number'      => $_POST['txtNumber'],
+                'state'       => $_POST['txtState'],
+                'country'     => $_POST['txtCountry'],
+                'complement'  => $_POST['txtComplement'],
+            ];
+            // Address 
+            $address = new Address();
+            $addressArray = $address->setArrayForAddress($addressArray);
+            $addressResponse = $address->insert($addressArray);
+            if (!$addressResponse) {
+                exit;
+            }
+
+            // House
+            $houseArray = [
+                'id_address'  => $addressResponse,
+                'id_user'     => $actualUser['userId'],
+                'house_type'  => $_POST["txtType"],
+                'description' => $_POST["txtDesc"],
+                'price'       => $_POST["txtPrice"],
+                'status'      => true
+                // 'type' => $_POST["txtTipeContract"],
+            ];
+
+            $house = new House();
+            $houseArray = $house->setArrayForHouse($houseArray);
+            $houseResponse = $house->insert($houseArray);
+            if (!$houseResponse) {
+                exit;
+            }
+
+            // // Photo
+            $photo = new Photo();
+            $photos = $_POST['photos_upload'][0];
+            $photosSaved = [];
+
+            foreach ($photos as $justPhoto) {
+                $justPhoto = $photo->setArrayForPhoto([$justPhoto]);
+                print_r($justPhoto);
+                $photoSave = $photo->insert($justPhoto);
+                array_push($photosSaved, $photoSave);
+            }
+
+            foreach ($photosSaved as $photoSaved) {
+                $photo->insert_photo_and_house($photoSaved, $houseResponse);
+            }
+            // relaciona 
         } else {
             header('Location: /test-arbo/arbo-test');
         }

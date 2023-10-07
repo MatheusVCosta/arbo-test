@@ -11,7 +11,8 @@ class Database
         $dbpassword = $config->DB_PASSWORD;
 
         try {
-            $pdo = new PDO('mysql:host=' . $dbhost . ';dbname=' . $dbname, $dbuser, $dbpassword);
+            $opcoes = array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION);
+            $pdo = new PDO('mysql:host=' . $dbhost . ';dbname=' . $dbname, $dbuser, $dbpassword, $opcoes);
             return $pdo;
         } catch (PDOException $ex) {
             throw new PDOException($ex);

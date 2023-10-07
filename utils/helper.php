@@ -81,7 +81,6 @@ function _http_response_json($args = [])
 
 function _create_auth_session($args = [])
 {
-    session_start();
     $_SESSION['user_authenticated'] = [
         'logged'    => true,
         'userId'    => $args['id'],

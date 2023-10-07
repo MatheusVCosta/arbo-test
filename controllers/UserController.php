@@ -12,6 +12,7 @@ class UserController extends RenderView
 
         $this->loadView('user_login', [
             'config' => $config,
+
         ]);
     }
     public function user_auth()
@@ -40,7 +41,6 @@ class UserController extends RenderView
 
     public function user_logout()
     {
-        session_start();
         if ($_SESSION['user_authenticated']) {
             _destroy_session('user_authenticated');
         }

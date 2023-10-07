@@ -1,6 +1,5 @@
 <?php
-session_start();
-if (!$_SESSION['user_authenticated']) {
+if (!isset($_SESSION['user_authenticated'])) {
     header('Location: /test-arbo/arbo-test');
 }
 ?>
