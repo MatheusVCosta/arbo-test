@@ -83,7 +83,8 @@ function _create_auth_session($args = [])
 {
     session_start();
     $_SESSION['user_authenticated'] = [
-        'logged'   => true,
+        'logged'    => true,
+        'userId'    => $args['id'],
         'userName'  => $args['name'],
         'userEmail' => $args['email'],
     ];

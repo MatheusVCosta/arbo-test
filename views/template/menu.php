@@ -14,6 +14,7 @@ session_start()
             <li class="nav-item item"><a href="/test-arbo/arbo-test/">Inicio</a></li>
             <li class="nav-item"><a href="/test-arbo/arbo-test/user_index"><button class="btn login">Área do usuário</button></a></li>
             <li class="nav-item"><a href="/test-arbo/arbo-test/renderInsertHouse"><button class="btn btn-search mg-1 pointer">Anunciar</button></a></li>
+            <li class="nav-item"><a href="/test-arbo/arbo-test/user_logout"><button class="btn btn-search mg-1 pointer">Sair</button></a></li>
             <li class="border-1-orange" style="width:45px;height:45px;border-radius:25px;"></li>
 
         </ul>

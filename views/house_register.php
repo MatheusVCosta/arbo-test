@@ -3,8 +3,6 @@ session_start();
 if (!$_SESSION['user_authenticated']) {
     header('Location: /test-arbo/arbo-test');
 }
-
-echo "oi"
 ?>
 <html>
 <?php require_once("template/head.php") ?>
@@ -12,16 +10,18 @@ echo "oi"
 <body>
     <?php require_once("template/header.php") ?>
 
-    <div id="app" class="center">
+    <div id="app">
         <h1>Anunciar Meu Imóvel</h1>
         <span class="line"></span>
         <div class="container col">
             <form action="javascript:void(0)" enctype="multipart/form-data" id="formFiles" name="formFiles">
                 <h2 class="titulo-3">Que tal algumas fotos?</h2>
+                <div id="message" style="text-align:center"></div>
                 <div class="row wd-sm ">
+
                     <div class="content mg-1 flex-1">
                         <label class="btn btn-send pointer center labelSendFile" for="file">Escolher fotos</label>
-                        <input type="file" name="photo[]" id="file" style="display:none">
+                        <input type="file" name="photo[]" id="file" style="display:none" multiple>
                     </div>
                     <div class="content mg-1 flex-1">
                         <button type="submit" class="btn btn-send pointer center" id="uploadPhoto">Enviar foto</button>
@@ -85,7 +85,7 @@ echo "oi"
                 <span class="line mg-1"></span>
                 <div class="row center">
                     <div class="content mg-1 center flex-2">
-                        <button class="btn btn-send pointer" style="width:100%">Anunciar Casa</button>
+                        <button class="btn btn-send pointer" id="btnSendHouse" style="width:100%">Anunciar Casa</button>
                     </div>
                 </div>
             </form>

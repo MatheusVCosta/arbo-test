@@ -12,7 +12,6 @@ class UserController extends RenderView
 
         $this->loadView('user_login', [
             'config' => $config,
-            'teste'  => 'teste2'
         ]);
     }
     public function user_auth()
@@ -32,7 +31,7 @@ class UserController extends RenderView
                 }
             }
             _create_auth_session(
-                ['name' => $response['name'], 'email' => $response['email']]
+                ['name' => $response['name'], 'email' => $response['email'], 'id' => $response['id']]
             );
         } else {
             header('Location: /test-arbo/arbo-test');
@@ -45,6 +44,7 @@ class UserController extends RenderView
         if ($_SESSION['user_authenticated']) {
             _destroy_session('user_authenticated');
         }
+        header('Location: /test-arbo/arbo-test');
     }
 
     public function index()

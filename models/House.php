@@ -5,12 +5,12 @@ class House extends Database
     private $pdo;
 
     private $rules_user = [
-        'street'      => ['not_null', 'str'],
-        'postal_code' => ['not_null', 'str'],
-        'district'    => ['not_null', 'str'],
-        'state'       => ['not_null', 'str'],
-        'number'      => ['not_null', 'int'],
-        'country'     => ['not_null', 'str'],
+        // 'street'      => ['not_null', 'str'],
+        // 'postal_code' => ['not_null', 'str'],
+        // 'district'    => ['not_null', 'str'],
+        // 'state'       => ['not_null', 'str'],
+        // 'number'      => ['not_null', 'int'],
+        // 'country'     => ['not_null', 'str'],
     ];
 
     public function __construct()
