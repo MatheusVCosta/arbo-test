@@ -8,6 +8,8 @@ class Database
     const SQL_WHERE  = "WHERE %s %s %s ";
     const SQL_ORDER  = "ORDER BY %s %s ";
 
+    const SQL_INSERT = "INSERT INTO %s (%s) VALUES ()%s";
+    const SQL_UPDATE = "UPDATE %s SET %s";
     protected $pdo;
     protected $table;
 
@@ -28,6 +30,22 @@ class Database
         }
     }
 
+    public function update(array $values): String
+    {
+        if (empty($this->table)) {
+            $ex = new PDOException("The name table not can empty", 500);
+            _exception_response_json($ex);
+            throw $ex;
+        }
+
+        $updateArr = [];
+        foreach ($values as $k => $v) {
+            $v = is_numeric($v) ? $v : "'" . $v . "'";
+            $updateArr = array_merge($updateArr, [$k . " = " . $v]);
+        }
+        $updateStr = sprintf(self::SQL_UPDATE, $this->table, implode(",", $updateArr));
+        return $updateStr;
+    }
 
     public function select(array $fields = []): String
     {
@@ -42,9 +60,10 @@ class Database
         return sprintf(self::SQL_SELECT, $filds_string, $this->table);
     }
 
-    public function join($tableJoin, $col1, $col2, $operator = "="): String
+    public function join($tableJoin, $colActual, $colJoin, $operator = "=", $tableActual = ""): String
     {
-        return sprintf(self::SQL_JOIN, $tableJoin, $this->table . "." . $col1, $operator, $tableJoin . "." . $col2);
+        $tableActual = !$tableActual ? $this->table : $tableActual;
+        return sprintf(self::SQL_JOIN, $tableJoin,  $tableActual . "." . $colActual, $operator, $tableJoin . "." . $colJoin);
     }
     /**
      *  @param $col1 String

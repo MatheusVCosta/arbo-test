@@ -12,6 +12,7 @@ class UserController extends RenderView
         $this->user = new User();
 
         $houses = $this->user->getUserHouses($actual_user['userId']);
+
         $this->loadView('user_home', [
             'config' => $config,
             'houses_user'  => $houses

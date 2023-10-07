@@ -33,6 +33,35 @@ class House extends Database
             return [];
         }
     }
+    public function fetch_by_id($house_id)
+    {
+        $selectQuery = $this->select([
+            'house.id as house_id',
+            'address.id as address_id',
+            'house.house_type as house_type',
+            'house.price as price',
+            'house.status as status',
+            'house.description as description',
+            'address.street as street',
+            'address.postal_code as postal_code',
+            'address.district as district',
+            'address.state as state',
+            'address.number as number',
+            'address.country as country',
+            'address.complement as complement',
+            'address.city as city',
+        ]);
+        $selectQuery .= $this->join("address", "id_address", "id", "=");
+        $selectQuery .= $this->where("house.id", $house_id);
+        $stm = $this->prepare($selectQuery);
+        $this->execute($stm);
+
+        if ($stm->rowCount() > 0) {
+            return $stm->fetchAll(PDO::FETCH_ASSOC);
+        } else {
+            return [];
+        }
+    }
 
     public function get_houses_by_user_id($user_id)
     {
@@ -53,11 +82,13 @@ class House extends Database
             'address.country as country',
             'address.complement as complement',
             'address.city as city',
+            'photo.path as path'
         ]);
         $selectQuery .= $this->join("address", "id_address", "id", "=");
         $selectQuery .= $this->join("user", "id_user", "id", "=");
+        $selectQuery .= $this->join("photos", "id", "id_house", "=");
+        $selectQuery .= $this->join("photo", "id_photo", "id", "=", 'photos');
         $selectQuery .= $this->where("user.id", "house.id_user");
-
         $stm = $this->prepare($selectQuery);
         $this->execute($stm);
 
@@ -87,7 +118,16 @@ class House extends Database
         return $this->pdo->lastInsertId();
     }
 
+    // UPDATE
 
+    public function updateHouse(array $args, $houseId)
+    {
+        $query = $this->update($args);
+        $query .= $this->where("house.id", $houseId);
+        $stm = $this->prepare($query);
+        $result = $this->execute($stm);
+        return $result;
+    }
     // METHODS UTILS
     public function setArrayForHouse(array $house_array)
     {

@@ -18,6 +18,7 @@ $routes = [
     'house_index'       => ['method' => 'GET', 'path' => '/house', 'url' => '/house_index', 'controller'   => 'HouseController@index'],
     'renderInsertHouse' => ['method' => 'GET', 'path' => '/house', 'url' => '/renderInsertHouse', 'controller'   => 'HouseController@renderInsertHouse'],
     'house_insert'      => ['method' => 'POST', 'path' => '/house', 'url' => '/house_insert', 'controller'   => 'HouseController@insert'],
+    'house_edit'        => ['method' => 'POST', 'path' => '/house', 'url' => '/house_edit', 'controller'   => 'HouseController@update'],
     'house_save_photo'  => ['method' => 'POST', 'path' => '/house', 'url' => '/house_save_photo', 'controller'   => 'HouseController@savePhoto'],
     'house_update'      => ['method' => 'GET', 'path' => '/house', 'url' => '/house_update', 'controller'   => 'HouseController@update'],
     'house_delete'      => ['method' => 'GET', 'path' => '/house', 'url' => '/house_delete', 'controller'   => 'HouseController@delete'],

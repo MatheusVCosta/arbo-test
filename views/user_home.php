@@ -15,7 +15,7 @@ if (!isset($_SESSION['user_authenticated'])) {
         <div class="container ">
             <?php foreach ($houses_user as $house) { ?>
                 <div class="card pointer" id="<?= $house['house_id'] ?>" onclick="editHouse(<?= $house['house_id'] ?>)">
-                    <img src="public/images/casa1.jpg" alt="">
+                    <img src="<?= $house['path'] ?>" alt="">
                     <div class="informations">
                         <div class="row mg-1 line">
                             <h3 class="titulo-3"><?= $house['district'] . ", " . $house['state'] ?></h3>
@@ -54,8 +54,8 @@ if (!isset($_SESSION['user_authenticated'])) {
 
 <script src="views/assets/javascript/request.js"></script>
 <script>
-    let editHouse = (id_house) => {
-        alert(id_house)
+    let editHouse = (house_id) => {
+        window.location = `${url_base}/renderInsertHouse?house_id=${house_id}&page_mode='edit'`
     }
 </script>
 

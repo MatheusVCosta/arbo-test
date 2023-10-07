@@ -15,15 +15,17 @@ class Core
             $url_bakup = "/";
             $url = "home";
         }
+
         foreach ($routes as $k => $v) {
-            if ($v['url'] != $url_bakup) {
-                continue;
-            }
-            if ($v['method'] != $request_method) {
-                continue;
-            }
             $pattern = '#^' . preg_replace('/{id}/', '(\w+)', $url) . '$#';
             if (preg_match($pattern, $url, $matches)) {
+
+                if ($v['url'] != $url_bakup) {
+                    continue;
+                }
+                if ($v['method'] != $request_method) {
+                    continue;
+                }
 
                 array_shift($matches);
                 [$currentController, $action] = explode('@', $v['controller']);

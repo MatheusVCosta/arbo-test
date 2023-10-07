@@ -2,7 +2,6 @@
 
 class Address extends Database
 {
-    private $pdo;
 
     private $rules_user = [
         'street'      => ['not_null', 'str'],
@@ -16,8 +15,17 @@ class Address extends Database
     public function __construct()
     {
         $this->pdo = $this->getConnection();
+        $this->table = "address";
     }
 
+    public function updateAddress(array $args, $addressId)
+    {
+        $query = $this->update($args);
+        $query .= $this->where("address.id", $addressId);
+        $stm = $this->prepare($query);
+        $result = $this->execute($stm);
+        return $result;
+    }
 
     public function insert($address)
     {
