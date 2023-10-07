@@ -9,12 +9,16 @@ class HomeController extends RenderView
     // }
     public function index()
     {
+
+        $house = new House();
+        $housers = $house->all();
+
         $config = $this->get_sentings();
-        // $users = new User();
         $this->loadView('home', [
-            'config' => $config,
-            // 'title' => 'Home',
-            // 'users' => $users->fetch()
+            'config'  => $config,
+            'title'   => 'Home',
+            'housers' => $housers
+
         ]);
     }
 }

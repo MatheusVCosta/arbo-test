@@ -5,6 +5,19 @@ class UserController extends RenderView
     use Config;
     private $user;
 
+    public function index()
+    {
+        $actual_user = $_SESSION['user_authenticated'];
+        $config = $this->get_sentings();
+        $this->user = new User();
+
+        $houses = $this->user->getUserHouses($actual_user['userId']);
+        $this->loadView('user_home', [
+            'config' => $config,
+            'houses_user'  => $houses
+        ]);
+    }
+
     public function login()
     {
         $config = $this->get_sentings();
@@ -47,19 +60,7 @@ class UserController extends RenderView
         header('Location: /test-arbo/arbo-test');
     }
 
-    public function index()
-    {
 
-        $config = $this->get_sentings();
-        $this->user = new User();
-
-        $users = $this->user->fetchAll();
-
-        $this->loadView('user_home', [
-            'config' => $config,
-            'teste'  => 'teste 23wqe'
-        ]);
-    }
 
     public function register()
     {

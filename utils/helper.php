@@ -63,10 +63,12 @@ function _exception_response_json($ex, $args = [])
         'trace'      => $ex->getTrace(),
     ];
     $exception = array_merge($exception, $args);
-    http_response_code($ex->getCode());
+    http_response_code(
+        is_string($ex->getCode() && is_numeric($ex->getCode()) ? intval($ex->getCode()) : intval($ex->getCode()))
+    );
     header('Content-type: application/json');
     print(json_encode($exception));
-    return json_encode($exception);
+    // return json_encode($exception);
     exit;
 }
 

@@ -1,7 +1,6 @@
 <?php
 if (!isset($_SESSION['user_authenticated'])) {
-    print('sadas');
-    // header('Location: /test-arbo/arbo-test');
+    header('Location: /test-arbo/arbo-test');
 }
 ?>
 <html>
@@ -14,30 +13,34 @@ if (!isset($_SESSION['user_authenticated'])) {
         <h1>Meus imóveis</h1>
         <span class="line"></span>
         <div class="container ">
-            <?php for ($i = 1; $i <= 7; $i++) { ?>
-                <div class="card pointer">
+            <?php foreach ($houses_user as $house) { ?>
+                <div class="card pointer" id="<?= $house['house_id'] ?>" onclick="editHouse(<?= $house['house_id'] ?>)">
                     <img src="public/images/casa1.jpg" alt="">
                     <div class="informations">
                         <div class="row mg-1 line">
-                            <h3 class="titulo-3">Chácara Santo Antônio (Zona Leste), São Paulo</h3>
+                            <h3 class="titulo-3"><?= $house['district'] . ", " . $house['state'] ?></h3>
                         </div>
                         <div class="row mg-1">
-                            <span class="street-text">Rua xablau</span>
+                            <span class="street-text"><?= $house['street'] . ", " . $house['city'] ?></span>
                         </div>
                         <div class="row mg-1">
-                            <p class="card-text">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quas error labore earum. Consequatur reprehenderit possimus necessitatibus perferendis et! Excepturi repudiandae doloribus maiores id facilis, ad quo error asperiores minus temporibus?</p>
+                            <p class="card-text">
+                                <?= $house['description'] ?>
+                            </p>
                         </div>
                         <div class="row mg-1">
-                            <p>R$495.000</p>
+                            <p>R$<?= $house['price'] ?></p>
                         </div>
-                        <div class="rooms-row ">
-                            <span class='rooms'>2 quartos</span>
-                            <span class='rooms'>2 quartos</span>
-                            <span class='rooms'>2 quartos</span>
-                            <span class='rooms'>2 quartos</span>
-                            <span class='rooms'>2 quartos</span>
-                            <span class='rooms'>2 quartos</span>
-                        </div>
+                        <?php if (false) { ?>
+                            <div class="rooms-row ">
+                                <span class='rooms'>2 quartos</span>
+                                <span class='rooms'>2 quartos</span>
+                                <span class='rooms'>2 quartos</span>
+                                <span class='rooms'>2 quartos</span>
+                                <span class='rooms'>2 quartos</span>
+                                <span class='rooms'>2 quartos</span>
+                            </div>
+                        <?php } ?>
                     </div>
                 </div>
             <?php } ?>
@@ -50,5 +53,10 @@ if (!isset($_SESSION['user_authenticated'])) {
 </body>
 
 <script src="views/assets/javascript/request.js"></script>
+<script>
+    let editHouse = (id_house) => {
+        alert(id_house)
+    }
+</script>
 
 </html>

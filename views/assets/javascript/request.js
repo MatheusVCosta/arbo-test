@@ -9,6 +9,11 @@ const message_erros = {
 
 let photos_upload = []
 
+
+// let editHouse = ($id_house) => {
+//     alert('oi')
+// }
+
 // insert_house
 $("#uploadPhoto").click((e) => {
     e.preventDefault()

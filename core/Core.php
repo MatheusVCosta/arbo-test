@@ -32,7 +32,7 @@ class Core
                 require_once __DIR__ . "/../controllers/$currentController.php";
                 //Ex: $newController = new "UserController()"
                 $newController = new $currentController();
-                $r = $newController->$action();
+                $newController->$action();
             }
         }
 

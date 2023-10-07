@@ -2,8 +2,6 @@
 
 class User extends Database
 {
-    private $pdo;
-
     private $rules_user = [
         'name'          => ['not_null', 'str'],
         'email'         => ['not_null', 'str'],
@@ -14,6 +12,7 @@ class User extends Database
     public function __construct()
     {
         $this->pdo = $this->getConnection();
+        $this->table = "user";
     }
     public function fetchAll()
     {
@@ -23,6 +22,13 @@ class User extends Database
         } else {
             return [];
         }
+    }
+
+    public function getUserHouses($user_id)
+    {
+        $house = new House();
+        $houses = $house->get_houses_by_user_id($user_id);
+        return $houses;
     }
 
     public function fetchId($id)
