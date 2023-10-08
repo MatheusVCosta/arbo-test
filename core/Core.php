@@ -15,7 +15,6 @@ class Core
             $url_bakup = "/";
             $url = "home";
         }
-
         foreach ($routes as $k => $v) {
             $pattern = '#^' . preg_replace('/{id}/', '(\w+)', $url) . '$#';
             if (preg_match($pattern, $url, $matches)) {
@@ -26,7 +25,6 @@ class Core
                 if ($v['method'] != $request_method) {
                     continue;
                 }
-
                 array_shift($matches);
                 [$currentController, $action] = explode('@', $v['controller']);
                 $routerFound = true;

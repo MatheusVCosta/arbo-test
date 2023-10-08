@@ -70,14 +70,14 @@
                     </div>
                 </div>
                 <div class="row mg-1">
-                    <button class="btn btn-search mg-1 pointer flex-2">Buscar</button>
+                    <button class="btn btn-orange mg-1 pointer flex-2">Buscar</button>
                 </div>
             </div>
             <div class="content flex-2">
                 <div class="container ">
-                    <?php foreach ($housers as $house) { ?>
+                    <?php foreach ($houses as $house) { ?>
                         <div class="card pointer">
-                            <img src="public/images/casa1.jpg" alt="">
+                            <img src="<?= $house['photos'][0]['path'] ?>" alt="">
                             <div class="informations">
                                 <div class="row mg-1 line">
                                     <h3 class="titulo-3"><?= $house['district'] . ", " . $house['state'] ?></h3>
@@ -91,15 +91,16 @@
                                     </p>
                                 </div>
                                 <div class="row mg-1">
-                                    <p>R$<?= $house['price'] ?></p>
+                                    <p class="text-size-1">R$<?= $house['price'] ?></p>
+                                </div>
+                                <div class="rooms-row flex-2">
+                                    <span class='rooms flex-1'><?= $house['house_type'] ?></span>
+                                    <span class='rooms flex-1'><?= $house['contract_type'] ?></span>
                                 </div>
                                 <div class="rooms-row ">
-                                    <span class='rooms'>2 quartos</span>
-                                    <span class='rooms'>2 quartos</span>
-                                    <span class='rooms'>2 quartos</span>
-                                    <span class='rooms'>2 quartos</span>
-                                    <span class='rooms'>2 quartos</span>
-                                    <span class='rooms'>2 quartos</span>
+                                    <span class='rooms'><?= $house['amout_room'] ?> Quatos</span>
+                                    <span class='rooms'><?= $house['amount_baths'] ?> Banheiros</span>
+                                    <span class='rooms'><?= $house['amount_vacancy'] ?> Vagas de garagem</span>
                                 </div>
                             </div>
                         </div>

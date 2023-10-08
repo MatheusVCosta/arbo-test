@@ -28,30 +28,36 @@ function encrypt_password($password)
     return $new_password;
 }
 
-function validate($key, $value, $rules_user)
-{
-    $rules = $rules_user[$key];
-
-    foreach ($rules as $rule) {
-        $rule = "_$rule";
-        call_user_func_array($rule, [$value, $key]);
-    }
-}
 
 function _not_null($value, $field)
 {
     if (!isset($value) || empty($value)) {
         $ex = new Exception("The field '$field' not can null", 500);
         _exception_response_json($ex, ["field" => $field, "type_error" => "field_null"]);
+        return $ex;
     }
+    return true;
 }
 
 function _str($value, $field)
 {
     if (!is_string($value)) {
-        $ex = new Exception("The field '$field' not can null", 500);
+        $type = gettype($value);
+        $ex = new Exception("The field '$field' is a STRING not $type", 500);
         _exception_response_json($ex);
+        return $ex;
     }
+    return true;
+}
+function _int($value, $field)
+{
+    if (!is_numeric($value)) {
+        $type = gettype($value);
+        $ex = new Exception("The field '$field' is a INT not $type", 500);
+        _exception_response_json($ex);
+        return $ex;
+    }
+    return true;
 }
 
 function _exception_response_json($ex, $args = [])
@@ -67,19 +73,26 @@ function _exception_response_json($ex, $args = [])
         is_string($ex->getCode() && is_numeric($ex->getCode()) ? intval($ex->getCode()) : intval($ex->getCode()))
     );
     header('Content-type: application/json');
-    print(json_encode($exception));
-    // return json_encode($exception);
+    print_r(json_encode($exception));
     exit;
 }
 
-
-function _http_response_json($args = [])
+function response($args = [])
 {
     http_response_code(200);
     header('Content-type: application/json');
-    print(json_encode($args));
+    print_r(json_encode($args));
     exit;
 }
+
+function responseArr($args = [])
+{
+    http_response_code(200);
+    header('Content-type: application/json');
+    print_r($args);
+    exit;
+}
+
 
 function _create_auth_session($args = [])
 {
@@ -89,6 +102,36 @@ function _create_auth_session($args = [])
         'userName'  => $args['name'],
         'userEmail' => $args['email'],
     ];
+}
+function validate($key, $value, $rules_user)
+{
+    $rules = isset($rules_user[$key]) ? $rules_user[$key] : "";
+    if ($rules != "") {
+        foreach ($rules as $rule) {
+            $rule = "_$rule";
+            $is_ok = call_user_func_array($rule, [$value, $key]);
+            if (!$is_ok) {
+                return false;
+            }
+        }
+    }
+    return true;
+}
+
+function prepareArrayForDatabase(array $args, $rules)
+{
+    if (!isset($args) || empty($args)) {
+        $ex = new Exception("Filds needs filled!", 500);
+        _exception_response_json($ex);
+    }
+
+    foreach ($args as $key => $value) {
+        $valid = validate($key, $value, $rules);
+        if (!$valid) {
+            throw new Exception("Error");
+        }
+    }
+    return array_merge($args, prepare_date_to_insert());
 }
 
 function _destroy_session($session_name)

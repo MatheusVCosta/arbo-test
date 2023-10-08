@@ -7,6 +7,10 @@ class UserController extends RenderView
 
     public function index()
     {
+        if (!isset($_SESSION['user_authenticated'])) {
+            header('Location: /test-arbo/arbo-test');
+        }
+
         $actual_user = $_SESSION['user_authenticated'];
         $config = $this->get_sentings();
         $this->user = new User();
@@ -19,38 +23,47 @@ class UserController extends RenderView
         ]);
     }
 
-    public function login()
+    public function insert()
     {
+
+        $response = [];
         $config = $this->get_sentings();
         $this->user = new User();
 
-        $this->loadView('user_login', [
-            'config' => $config,
-
-        ]);
-    }
-    public function user_auth()
-    {
-        $config = $this->get_sentings();
-        $this->user = new User();
-
-        if (!empty($_POST)) {
-
-            $data  = $_POST;
-            $response = $this->user->login($data['txtEmail'], $data['txtPassword']);
-
-            if ($response instanceof Exception) {
-                if ($response->getCode() < 200 || $response->getCode()  > 299) {
-                    _exception_response_json($response);
-                    throw new Exception($response->getMessage());
-                }
-            }
-            _create_auth_session(
-                ['name' => $response['name'], 'email' => $response['email'], 'id' => $response['id']]
-            );
-        } else {
+        if (empty($_POST)) {
             header('Location: /test-arbo/arbo-test');
         }
+        $data  = $_POST;
+
+        $user = $this->user->setArrayForUser([
+            'name'       => $data['txtName'],
+            'email'      => $data['txtEmail'],
+            'password'   => $data['txtPassword'],
+        ]);
+
+        $result = $this->user->insertUser($user);
+
+        if (!$result) {
+            $response = [
+                "message" => "Usuário não inserido!",
+                "status_code" => 500,
+            ];
+            response($response);
+            return response($response);
+        } else {
+            $response = [
+                "message" => "Usuário inserido com sucesso!",
+                "status_code" => 201,
+            ];
+            $new_user = $this->user->fetchId($result);
+            _create_auth_session(['id' => $new_user['id'], 'name' => $new_user['name'], 'email' => $new_user['email']]);
+            response($response);
+            exit;
+        }
+
+        $this->loadView('user_home', [
+            'config' => $config,
+        ]);
     }
 
     public function user_logout()
@@ -72,48 +85,36 @@ class UserController extends RenderView
         ]);
     }
 
-    public function insert()
-    {
 
-        $response = [];
+
+    public function login()
+    {
         $config = $this->get_sentings();
         $this->user = new User();
 
-        if (!empty($_POST)) {
-            $data  = $_POST;
+        $this->loadView('user_login', [
+            'config' => $config,
 
-            $user = $this->user->setArrayForUser([
-                'name'       => $data['txtName'],
-                'email'      => $data['txtEmail'],
-                'password'   => $data['txtPassword'],
-                'birth_date' => "12/11/2003",
-            ]);
-
-            $result = $this->user->insert($user);
-
-            if (!$result) {
-                $response = [
-                    "message" => "Usuário não inserido!",
-                    "status_code" => 500,
-                ];
-                _http_response_json($response);
-                exit;
-            } else {
-                $response = [
-                    "message" => "Usuário inserido com sucesso!",
-                    "status_code" => 201,
-                ];
-                _http_response_json($response);
-            }
-            _create_auth_session(['name' => "teste", "email" => 'teste']);
-            if ($_SESSION['user_authenticated']) {
-                echo "oi";
-            }
-            $this->loadView('user_home', [
-                'config' => $config,
-            ]);
-        } else {
+        ]);
+    }
+    public function user_auth()
+    {
+        if (empty($_POST)) {
             header('Location: /test-arbo/arbo-test');
         }
+
+        $config = $this->get_sentings();
+        $this->user = new User();
+
+        $data  = $_POST;
+        $response = $this->user->login($data['txtEmail'], $data['txtPassword']);
+
+        if ($response instanceof Exception) {
+            if ($response->getCode() < 200 || $response->getCode()  > 299) {
+                _exception_response_json($response);
+                throw new Exception($response->getMessage());
+            }
+        }
+        _create_auth_session(['name' => $response['name'], 'email' => $response['email'], 'id' => $response['id']]);
     }
 }

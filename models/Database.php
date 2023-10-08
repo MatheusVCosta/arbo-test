@@ -8,12 +8,14 @@ class Database
     const SQL_WHERE  = "WHERE %s %s %s ";
     const SQL_ORDER  = "ORDER BY %s %s ";
 
-    const SQL_INSERT = "INSERT INTO %s (%s) VALUES ()%s";
-    const SQL_UPDATE = "UPDATE %s SET %s";
+    const SQL_INSERT = "INSERT INTO %s (%s) VALUES (%s)";
+    const SQL_UPDATE = "UPDATE %s SET %s ";
+    const SQL_DELETE = "DELETE FROM %s ";
+
     protected $pdo;
     protected $table;
 
-    public function getConnection()
+    public function getConnection(): PDO
     {
         $config = $this->get_sentings();
         $dbname = $config->DB_NAME;
@@ -28,6 +30,24 @@ class Database
         } catch (PDOException $ex) {
             throw new PDOException($ex);
         }
+    }
+
+    public function select(array $fields = []): String
+    {
+        if (empty($this->table)) {
+            $ex = new PDOException("The name table not can empty", 500);
+            _exception_response_json($ex);
+            throw $ex;
+        }
+
+        $filds_string = !empty($fields) ? implode(",", $fields) : "*";
+
+        return sprintf(self::SQL_SELECT, $filds_string, $this->table);
+    }
+
+    public function insert(String $columns, String $values): String
+    {
+        return sprintf(self::SQL_INSERT, $this->table, $columns, $values);
     }
 
     public function update(array $values): String
@@ -47,20 +67,12 @@ class Database
         return $updateStr;
     }
 
-    public function select(array $fields = []): String
+    public function delete()
     {
-        if (empty($this->table)) {
-            $ex = new PDOException("The name table not can empty", 500);
-            _exception_response_json($ex);
-            throw $ex;
-        }
-
-        $filds_string = !empty($fields) ? implode(",", $fields) : "*";
-
-        return sprintf(self::SQL_SELECT, $filds_string, $this->table);
+        return sprintf(self::SQL_DELETE, $this->table);
     }
 
-    public function join($tableJoin, $colActual, $colJoin, $operator = "=", $tableActual = ""): String
+    public function join(String $tableJoin, String $colActual, String $colJoin, String $operator = "=", $tableActual = ""): String
     {
         $tableActual = !$tableActual ? $this->table : $tableActual;
         return sprintf(self::SQL_JOIN, $tableJoin,  $tableActual . "." . $colActual, $operator, $tableJoin . "." . $colJoin);
@@ -77,14 +89,14 @@ class Database
         return sprintf(self::SQL_WHERE, $col1, $operator, $col2);
     }
 
-    protected function prepare($sql)
+    protected function prepare($sql): PDOStatement
     {
         return $this->pdo->prepare($sql);
     }
-    protected function execute(PDOStatement $stm)
+    protected function execute(PDOStatement $stm, $args = []): bool
     {
         try {
-            $result = $stm->execute();
+            $result = $stm->execute($args);
             return $result;
         } catch (PDOException $ex) {
             _exception_response_json($ex);

@@ -5,7 +5,6 @@ class User extends Database
     private $rules_user = [
         'name'          => ['not_null', 'str'],
         'email'         => ['not_null', 'str'],
-        'birth_date'    => ['not_null', 'str'],
         'password'      => ['not_null', 'str'],
     ];
 
@@ -63,17 +62,18 @@ class User extends Database
     }
 
 
-    public function insert($user)
+    public function insertUser($user)
     {
         $user['password'] = encrypt_password($user['password']);
         $userKeys = implode(",", array_keys($user));
         $userValues = array_values($user);
         $prepareString = prepare_array_to_string($userValues);
 
-        $insertQuery = "INSERT INTO my_new_house_db.`user` ($userKeys) VALUES ($prepareString)";
-        $stm = $this->pdo->prepare($insertQuery);
-        $result = $stm->execute($userValues);
-        return $result;
+        $insertQuery = $this->insert($userKeys, $prepareString);
+        $stm = $this->prepare($insertQuery);
+
+        $stm->execute($userValues);
+        return $this->pdo->lastInsertId();;
     }
 
 

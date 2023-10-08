@@ -9,13 +9,13 @@ if (!isset($_SESSION['user_authenticated'])) {
 <body>
     <?php require_once("template/header.php") ?>
 
-    <div id="app" class="center">
+    <div id="app">
         <h1>Meus imóveis</h1>
         <span class="line"></span>
         <div class="container ">
             <?php foreach ($houses_user as $house) { ?>
-                <div class="card pointer" id="<?= $house['house_id'] ?>" onclick="editHouse(<?= $house['house_id'] ?>)">
-                    <img src="<?= $house['path'] ?>" alt="">
+                <div class="card pointer" id="<?= $house['house_id'] ?>" onclick="openEditHOuse(<?= $house['house_id'] ?>)">
+                    <img src="<?= $house['photos'][0]['path'] ?>" alt="">
                     <div class="informations">
                         <div class="row mg-1 line">
                             <h3 class="titulo-3"><?= $house['district'] . ", " . $house['state'] ?></h3>
@@ -54,8 +54,8 @@ if (!isset($_SESSION['user_authenticated'])) {
 
 <script src="views/assets/javascript/request.js"></script>
 <script>
-    let editHouse = (house_id) => {
-        window.location = `${url_base}/renderInsertHouse?house_id=${house_id}&page_mode='edit'`
+    let openEditHOuse = (house_id) => {
+        window.location = `${url_base}/renderInsertHouse?house_id=${house_id}&page_mode=edit`
     }
 </script>
 
