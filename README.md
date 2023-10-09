@@ -14,7 +14,7 @@
     Desenvolver uma aplicação em PHP que faça o gerenciamento de imóveis
 
 
-### Back-end
+### Back-end [PHP]
 #### Funcionalidade
 
 - [x] Adicionar um novo imóvel 
@@ -22,7 +22,7 @@
 - [x] Atualizar informações de um imóvel
 - [x] remover imóvel
 
-### Front-end
+### Front-end [CSS, JS]
 #### Design
 
 - [x] Tela para adicionar imóveis
