@@ -10,8 +10,17 @@ if (!isset($_SESSION['user_authenticated'])) {
     <?php require_once("template/header.php") ?>
 
     <div id="app">
-        <h1>Meus imóveis</h1>
+        <?php if (empty($houses)) { ?>
+            <h1>Meus imóveis</h1>
+        <?php } ?>
         <div class="container container-wrap">
+            <?php if (!empty($houses)) { ?>
+                <div class="empty">
+                    <img src="public/images/home-icon-silhouette.png">
+                    <p>Sem nada aqui ainda!</p>
+
+                </div>
+            <?php } ?>
             <?php foreach ($houses_user as $house) { ?>
                 <div class="card pointer flex-1 mg-2 max-width-card padding-1 " id="<?= $house['house_id'] ?>" onclick="openEditHOuse(<?= $house['house_id'] ?>)">
                     <div class="box-img flex-1">

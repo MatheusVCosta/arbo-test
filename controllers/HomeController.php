@@ -8,29 +8,39 @@ class HomeController extends RenderView
 
         $house = new House();
         $houses = $house->all();
+        // $d = $house->getPhotos();
         $config = $this->get_sentings();
-        if ($houses) {
-            $this->loadView('home', [
-                'config'  => $config,
-                'title'   => 'Home',
-                'houses' => $houses
+        $this->loadView('home', [
+            'config'  => $config,
+            'title'   => 'Home',
+            'houses' => $houses
 
-            ]);
-            return true;
-        }
+        ]);
     }
 
     public function indexFilter()
     {
         $house = new House();
+
+        $typeHouse = isset($_GET["typeHouse"]) ? $_GET["typeHouse"] : false;
+        $state = isset($_GET["txtState"]) ? $_GET["txtState"] : false;
+        $city = isset($_GET["txtCity"]) ? $_GET["txtCity"] : false;
+
+        $qtdRoom = isset($_GET["txtQtdRooms"]) ? $_GET["txtQtdRooms"] : false;
+        $qtdBath = isset($_GET["txtQtdBaths"]) ? $_GET["txtQtdBaths"] : false;
+        $qtdVacancy = isset($_GET["txtQtdVacancy"]) ? $_GET["txtQtdVacancy"] : false;
+
         $houses = $house->filterHouse([
-            ['column' => 'house.house_type', 'value' => "'Casa'"],
-            ['column' => 'address.state', 'value' => "'São Paulo'"]
+            ['column' => 'house.house_type', 'value' => $typeHouse, "operator" => "="],
+            ['column' => 'address.state', 'value' => $state, "operator" => "="],
+            ['column' => 'address.city', 'value' =>  $city, "operator" => "="],
+            ['column' => 'house.amout_room', 'value' =>  $qtdRoom, "operator" => ">="],
+            ['column' => 'house.amount_baths', 'value' =>  $qtdBath, "operator" => ">="],
+            ['column' => 'house.amount_vacancy', 'value' =>  $qtdVacancy, "operator" => ">="],
+
         ]);
-        $config = $this->get_sentings();
         if ($houses) {
             $this->loadView('template/mainHome', [
-                'config'  => $config,
                 'title'   => 'Home',
                 'houses' => $houses
 

@@ -149,7 +149,7 @@ function sendRequest(method, url, data) {
         url: url,
         data: data,
         success: (response) => {
-            console.log('sucesso')
+            console.log(response)
             window.location = `${url_base}/user_index`
             $("#message").html(`<p style="color:green; font-size:20px">${response['message']}!</p>`)
         },
@@ -178,16 +178,24 @@ function deleteHouse(houseId) {
 }
 
 function applyFilter() {
-    // $filter = 'txtPostalCode': $("#txtPostalCode").val(),
     data = {
-        "typeHouse": 'casa'
+        "typeHouse": $("#selectTypeHouse").val(),
+        "txtState": $("#txtState").val(),
+        "txtCity": $("#txtCity").val(),
+
+        "txtQtdRooms": $("#txtQtdRooms").val(),
+        "txtQtdBaths": $("#txtQtdBaths").val(),
+        "txtQtdVacancy": $("#txtQtdVacancy").val(),
     }
+    console.log(data);
     $.ajax({
         url: `${url_base}/home_filter`,
         type: "GET",
         data: data,
         success: (data) => {
             if (data) {
+                console.log(data)
+                $("#renderizeContent").html()
                 $("#renderizeContent").html(data)
             }
 

@@ -1,7 +1,9 @@
 <?php
 ?>
 <div class="nav">
+    <img src="public/images/logo.png" alt="">
     <a target="_blank" class="brand" href="">Minha Casa Nova</a>
+
     <?php if (!isset($_SESSION['user_authenticated'])) { ?>
         <ul>
             <li class="nav-item item"><a href="/test-arbo/arbo-test/">Inicio</a></li>

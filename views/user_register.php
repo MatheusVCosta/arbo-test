@@ -6,12 +6,12 @@
     <div id="app">
         <div class="container direction-collum w-sm max-w-sm">
             <h1 class="text-center color-orange">Minha Casa Nova</h1>
-            <p class="text-center">Venha! Anuncie sua casa hoje e pegue a chave amanhã</p>
+            <p class="text-center">Venha! Anuncie sua casa hoje e entregue a chave amanhã</p>
             <div class="row">
                 <h2 class="color-orange">Cadastro</h2>
             </div>
             <div class="row flex-2 padding-1 border-1-orange radius-1 center">
-                <div class="content flex-2">
+                <div class="content flex-2 " style="width:370px; padding:20px">
                     <form id="" class="flex-2">
                         <div class="row flex-2">
                             <div class="content flex-2">
@@ -22,13 +22,13 @@
                         <div class="row flex-2">
                             <div class="content flex-1">
                                 <label for="txtEmail" class="text-size-1 mg-1">E-mail</label>
-                                <input type="text" class="input-text mg-1" name="txtEmail" id="txtEmail" required>
+                                <input type="email" class="input-text mg-1" name="txtEmail" id="txtEmail" required>
                             </div>
                         </div>
                         <div class="row flex-2">
                             <div class="content flex-2">
                                 <label for="txtPassword" class="text-size-1 mg-1">Senha</label>
-                                <input type="text" class="input-text mg-1" name="txtPassword" id="txtPassword" required>
+                                <input type="password" class="input-text mg-1" name="txtPassword" id="txtPassword" required>
                             </div>
                         </div>
                         <span class="line mg-t-1"></span>

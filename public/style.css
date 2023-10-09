@@ -22,7 +22,7 @@ header {
     display: flex;
     flex-direction: row;
     justify-content: center;
-
+    margin-bottom: 5rem;
     background-color: #1b325f;
     color: #fff;
     box-shadow: 2px 3px 14px 2px rgba(0, 0, 0, 0.75);
@@ -184,9 +184,9 @@ a:link {
     flex-direction: row;
     align-items: flex-start;
     cursor: pointer;
-    border: 5px solid #f26c4f;
-    background-color: #c9deef;
-    height: 250px;
+    border: 4px solid #f26c4f;
+    background-color: #d1d5d9a8;
+    height: 300px;
     max-height: 400px;
 }
 
@@ -218,8 +218,17 @@ a:link {
 }
 
 .max-width-card-md {
-    width: 50rem;
-    max-width: 70rem;
+    width: 70rem;
+    max-width: 80rem;
+}
+
+@media (max-width: 1600px) {
+
+    .max-width-card-md {
+        width: 50rem;
+        max-width: 80rem;
+    }
+
 }
 
 /* Card-properties */
@@ -228,7 +237,7 @@ a:link {
 .btn {
     width: 100px;
     height: 40px;
-    background-color: #00000000;
+    background-color: #f26c4f;
     border-radius: 0.4rem;
     color: #fff;
     font-family: 'Lato', sans-serif;
@@ -236,6 +245,29 @@ a:link {
     outline: none;
     border: none;
     outline: none;
+}
+
+.empty {
+    font-size: 2rem;
+    color: #e65d3e;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    flex: 2;
+}
+
+.empty img {
+    font-size: 2rem;
+    color: #e65d3e;
+    width: 270px;
+}
+
+.box {
+    min-height: 800px;
+    border-radius: 15px;
+    background-color: #fff;
+    padding: 25px;
 }
 
 .btn-orange {
@@ -347,6 +379,10 @@ a:link {
 
 .mg-t-2 {
     margin-top: 2rem;
+}
+
+.mg-b-2 {
+    margin-bottom: 5rem;
 }
 
 /* margin properties */

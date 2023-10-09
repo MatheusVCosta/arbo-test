@@ -1,21 +1,34 @@
 /* Style Menu */
 
+.results {
+    text-align: end;
+    color: #f26c4f;
+    font-size: 2.5em;
+    display: flex;
+    justify-content: flex-end;
+}
 
 .nav {
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    padding: 20px;
+    padding: 30px;
     /* border: 1px solid black; */
     flex-grow: 1;
+}
+
+.nav img {
+    width: 70px;
+    margin-left: 2rem;
+    margin-right: 1rem;
 }
 
 .brand {
     color: #fff;
     text-decoration: none;
     font-family: 'Lato', sans-serif;
-
+    font-size: 2rem;
 }
 
 .nav ul {

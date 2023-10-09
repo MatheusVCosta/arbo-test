@@ -16,14 +16,10 @@ class UserController extends RenderView
         $this->user = new User();
 
         $userHouses = $this->user->fetchHousesUser($actual_user['userId']);
-        if ($userHouses) {
-            $this->loadView('user_home', [
-                'config'       => $config,
-                'houses_user'  => $userHouses
-            ]);
-            return true;
-        }
-        response(["message" => "Usuário sem casas registradas", "status" => 200]);
+        $this->loadView('user_home', [
+            'config'       => $config,
+            'houses_user'  => $userHouses
+        ]);
     }
 
     public function insert()

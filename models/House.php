@@ -41,12 +41,23 @@ class House extends BasicORM
             'address.country as country',
             'address.complement as complement',
             'address.city as city',
-            'photo.path as path'
+            'photo.*'
+
         ]);
         $this->_join("user", "user.id", "house.id_user");
         $this->_join("address", "house.id_address", "address.id");
         $this->_join("photos", "photos.id_house", "house.id");
         $this->_join("photo", "photo.id", "photos.id_photo");
+        $houses = $this->_fetch();
+
+        return $houses;
+    }
+    public function getPhotos()
+    {
+        $this->_select('photo');
+        $this->_join("photos", "photos.id_photo", "photo.id");
+        $this->_join("house", "house.id", "photos.id_house");
+        // $this->_where("house.id", );
         return $this->_fetch();
     }
     public function filterHouse($filters)
@@ -78,7 +89,10 @@ class House extends BasicORM
         $this->_join("photos", "photos.id_house", "house.id");
         $this->_join("photo", "photo.id", "photos.id_photo");
         foreach ($filters as $filter) {
-            $this->_where($filter['column'], $filter['value']);
+            if ($filter['value'] === '') {
+                continue;
+            }
+            $this->_where($filter['column'], $filter['value'], $filter['operator']);
         }
         return $this->_fetch();
     }

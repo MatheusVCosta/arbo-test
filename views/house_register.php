@@ -35,7 +35,7 @@ if (!isset($_SESSION['user_authenticated'])) {
                                 </svg>
                                 Selecionar fotos
                             </label>
-                            <input type="file" name="photo[]" id="file" style="display:none" multiple>
+                            <input type="file" name="photo[]" id="file" style="display:none">
                             <p id="fileInfo" class="text-center fileInformation flex-1">Nenhum Arquivo Selecionado</p>
                         </div>
                     </div>

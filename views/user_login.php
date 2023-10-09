@@ -11,7 +11,7 @@
             <div class="row">
                 <h2 class="color-orange">Login</h2>
             </div>
-            <div class="row flex-2 padding-1 border-1-orange radius-1 center">
+            <div class="row flex-2 padding-1 border-1-orange radius-1 center" style="width:360px">
                 <div class="content flex-2">
                     <form id="" class="flex-2" method="POST">
                         <div class="row flex-2">
