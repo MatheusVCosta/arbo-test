@@ -194,4 +194,11 @@ Hoje eu ainda irei tentar colocar no ar para testarem, mas caso queiram clonar o
 Eu usei o servido Apache no Linux, para abrir no localhost basta colocar em /var/www/html/
 E acessar http://localhost/test-arbo/arbo-test/
 
+E para o banco de dados basta rodar o script mysql_dumo.sql que esta no repositório que já vai criar todas as tabelas e o banco
+Configurando as variaveis de ambieira em /core/Config.php
+em $this->DB_USER e $this->DB_PASSWORD passe as informações de login do seu banco de dados local
+![image](https://github.com/MatheusVCosta/arbo-test/assets/38003078/9a104484-28b3-42a1-81c0-6649b51112c5)
+
+
+
 
