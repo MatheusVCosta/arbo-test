@@ -177,7 +177,23 @@ function deleteHouse(houseId) {
     })
 }
 
+function applyFilter() {
+    // $filter = 'txtPostalCode': $("#txtPostalCode").val(),
+    data = {
+        "typeHouse": 'casa'
+    }
+    $.ajax({
+        url: `${url_base}/home_filter`,
+        type: "GET",
+        data: data,
+        success: (data) => {
+            if (data) {
+                $("#renderizeContent").html(data)
+            }
 
+        },
+    })
+}
 // insert_user
 $("#btnSend").click((e) => {
     e.preventDefault()

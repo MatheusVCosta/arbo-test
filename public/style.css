@@ -4,6 +4,18 @@
     laranja = #f26c4f
     azul claro = #e9f2f9
 */
+body {
+    background-color: #e9f2f9;
+}
+
+body,
+p,
+h3 {
+    margin: 0;
+    padding: 0;
+    font-family: 'Lato', sans-serif;
+}
+
 header {
     width: 100%;
     height: 100px;
@@ -16,6 +28,76 @@ header {
     box-shadow: 2px 3px 14px 2px rgba(0, 0, 0, 0.75);
 }
 
+form {
+    display: flex;
+    flex-direction: column;
+    margin-top: 2em;
+    margin-block-end: 0em;
+}
+
+#app {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    padding-top: 40px;
+    min-height: 100%;
+}
+
+.container {
+    width: auto;
+    max-width: 2000px;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.container-wrap {
+    flex-flow: row wrap;
+}
+
+.container.direction-collum {
+    flex-direction: column;
+}
+
+
+.row {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.content {
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-self: flex-start;
+}
+
+.content-center {
+    justify-content: center;
+}
+
+
+footer,
+.page-wrap:after {
+    height: 80px;
+}
+
+.footer {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: flex-end;
+    font-size: 1em;
+    width: 100%;
+    height: 80px;
+    color: #fff;
+}
+
+/* ---------------------------------------------------------- */
+
 .bg-classic {
     background-color: #1b325f;
 }
@@ -26,9 +108,7 @@ header {
 
 /* colors */
 
-body {
-    background-color: #e9f2f9;
-}
+
 
 input[type="file"] {
     display: none !important;
@@ -56,13 +136,7 @@ input[type="file"] {
     align-items: flex-start
 }
 
-body,
-p,
-h3 {
-    margin: 0;
-    padding: 0;
-    font-family: 'Lato', sans-serif;
-}
+
 
 a {
     color: #fff;
@@ -74,60 +148,7 @@ a:link {
     text-decoration: none;
 }
 
-form {
-    display: flex;
-    flex-direction: column;
-    margin-top: 2em;
-    margin-block-end: 0em;
-}
 
-#app {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
-    padding-top: 40px;
-    min-height: 100%;
-}
-
-.container {
-
-    width: 90vw;
-    max-width: 2000px;
-    display: flex;
-    flex-flow: row wrap;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 50px;
-}
-
-.container.direction-collum {
-    flex-direction: column;
-}
-
-
-.row {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-}
-
-
-footer,
-.page-wrap:after {
-    height: 80px;
-}
-
-.footer {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    justify-content: flex-end;
-    font-size: 1em;
-    width: 100%;
-    height: 80px;
-    color: #fff;
-}
 
 .github-link {
     display: flex;
@@ -148,7 +169,6 @@ footer,
     width: 350px;
     min-height: 70px !important;
     margin: 20px 15px;
-    /* justify-content: center; */
     align-items: center;
     align-content: center;
     padding: 15px;
@@ -158,33 +178,26 @@ footer,
 }
 
 .card {
-    width: 760px;
-    height: 400px;
-    padding: 30px;
-    margin: 20px 15px;
     box-shadow: 2px 5px 17px 0px rgb(0 0 0 / 48%);
     border-radius: 10px;
     display: flex;
     flex-direction: row;
-    align-items: center;
+    align-items: flex-start;
     cursor: pointer;
     border: 5px solid #f26c4f;
     background-color: #c9deef;
+    height: 250px;
+    max-height: 400px;
 }
 
 .card-text {
     display: -webkit-box;
-    -webkit-line-clamp: 8;
+    -webkit-line-clamp: 3;
     overflow: hidden;
     -webkit-box-orient: vertical;
-    font-size: 17px;
+    font-size: .875rem;
+    line-height: 1.0rem;
     text-align: justify;
-}
-
-.card img {
-    max-width: 350px;
-    height: 100%;
-    border-radius: 5px;
 }
 
 .card .informations {
@@ -193,10 +206,20 @@ footer,
     justify-content: flex-start;
     align-items: flex-start;
     margin-left: 20px;
-    /* margin-top: 20px; */
-    height: 100%;
+}
 
-    /* border: 1px solid black */
+.max-width-card {
+    max-width: 700px
+}
+
+.max-width-card-sm {
+    width: 25rem;
+    max-width: 40rem
+}
+
+.max-width-card-md {
+    width: 50rem;
+    max-width: 70rem;
 }
 
 /* Card-properties */
@@ -329,7 +352,7 @@ footer,
 /* margin properties */
 
 .padding-1 {
-    padding: 1.2rem;
+    padding: 1.0rem;
 }
 
 .padding-2 {
@@ -403,8 +426,8 @@ footer,
     cursor: pointer;
 }
 
-.line {
+/* .line {
     align-self: center;
     width: 100%;
     border-bottom: 1px solid #9cc4e4;
-}
+} */

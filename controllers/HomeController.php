@@ -7,13 +7,35 @@ class HomeController extends RenderView
     {
 
         $house = new House();
-        $houses = $house->fetch_house_all_informations();
+        $houses = $house->all();
         $config = $this->get_sentings();
-        $this->loadView('home', [
-            'config'  => $config,
-            'title'   => 'Home',
-            'houses' => $houses
+        if ($houses) {
+            $this->loadView('home', [
+                'config'  => $config,
+                'title'   => 'Home',
+                'houses' => $houses
 
+            ]);
+            return true;
+        }
+    }
+
+    public function indexFilter()
+    {
+        $house = new House();
+        $houses = $house->filterHouse([
+            ['column' => 'house.house_type', 'value' => "'Casa'"],
+            ['column' => 'address.state', 'value' => "'São Paulo'"]
         ]);
+        $config = $this->get_sentings();
+        if ($houses) {
+            $this->loadView('template/mainHome', [
+                'config'  => $config,
+                'title'   => 'Home',
+                'houses' => $houses
+
+            ]);
+            return true;
+        }
     }
 }

@@ -6,6 +6,7 @@ class Database
     const SQL_SELECT = "SELECT %s FROM %s ";
     const SQL_JOIN   = "INNER JOIN %s on %s %s %s ";
     const SQL_WHERE  = "WHERE %s %s %s ";
+    const SQL_WHERE_AND  = "AND %s %s %s ";
     const SQL_ORDER  = "ORDER BY %s %s ";
 
     const SQL_INSERT = "INSERT INTO %s (%s) VALUES (%s)";
@@ -77,15 +78,10 @@ class Database
         $tableActual = !$tableActual ? $this->table : $tableActual;
         return sprintf(self::SQL_JOIN, $tableJoin,  $tableActual . "." . $colActual, $operator, $tableJoin . "." . $colJoin);
     }
-    /**
-     *  @param $col1 String
-     *  @param $col2 String
-     *  @param $operator String
-     * 
-     *  @return String
-     */
-    public function where(String $col1, String $col2, String $operator = "="): String
+
+    public function where(String $col1, String $col2, String $operator = "=", $logicOperator = ""): String
     {
+
         return sprintf(self::SQL_WHERE, $col1, $operator, $col2);
     }
 

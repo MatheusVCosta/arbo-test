@@ -1,6 +1,6 @@
 <?php
 
-class User extends Database
+class User extends BasicORM
 {
     private $rules_user = [
         'name'          => ['not_null', 'str'],
@@ -23,11 +23,37 @@ class User extends Database
         }
     }
 
-    public function getUserHouses($user_id)
+    public function fetchHousesUser($user_id)
     {
-        $house = new House();
-        $houses = $house->get_houses_by_user_id($user_id);
-        return $houses;
+        $this->_select($this->table, [
+            'house.id as house_id',
+            'address.id as address_id',
+            'user.id as user_id',
+            'house.house_type as house_type',
+            'house.contract_type as contract_type',
+            'house.price as price',
+            'house.status as status',
+            'house.description as description',
+            'house.amout_room as amout_room',
+            'house.amount_vacancy as amount_vacancy',
+            'house.amount_baths as amount_baths',
+            'address.street as street',
+            'address.postal_code as postal_code',
+            'address.district as district',
+            'address.state as state',
+            'address.number as number',
+            'address.country as country',
+            'address.complement as complement',
+            'address.city as city',
+            'photo.path as path'
+        ]);
+        $this->_join("house", "user.id", "house.id_user");
+        $this->_join("address", "house.id_address", "address.id");
+        $this->_join("photos", "photos.id_house", "house.id");
+        $this->_join("photo", "photo.id", "photos.id_photo");
+        $this->_where("user.id", $user_id);
+        $houseUser = $this->_fetch();
+        return $houseUser;
     }
 
     public function fetchId($id)

@@ -2,7 +2,8 @@
 
 $routes = [
     // Home
-    'home' => ['method' => 'GET', 'path' => '/home', 'url' => '/', 'controller' => 'HomeController@index'],
+    'home'        => ['method' => 'GET', 'path' => '/home', 'url' => '/', 'controller' => 'HomeController@index'],
+    'home_filter' => ['method' => 'GET', 'path' => '/home_filter', 'url' => '/home_filter', 'controller' => 'HomeController@indexFilter'],
 
     // User CRUD
     'user_index'    => ['method' => 'GET', 'path'  => '/user', 'url' => '/user_index', 'controller'   => 'UserController@index'],

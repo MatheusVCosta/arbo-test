@@ -1,6 +1,6 @@
 <?php
 
-class House extends Database
+class House extends BasicORM
 {
     private $table_name = "house";
 
@@ -21,31 +21,66 @@ class House extends Database
     // SELECT
     public function all()
     {
-        $selectQuery = $this->select();
-        $selectQuery .= $this->join("address", "id_address", "id", "=");
-
-        $stm = $this->prepare($selectQuery);
-        $result = $this->execute($stm);
-
-        if ($stm->rowCount() > 0) {
-            return $stm->fetchAll(PDO::FETCH_ASSOC);
-        } else {
-            return [];
-        }
+        $this->_select($this->table, [
+            'house.id as house_id',
+            'address.id as address_id',
+            'user.id as user_id',
+            'house.house_type as house_type',
+            'house.contract_type as contract_type',
+            'house.price as price',
+            'house.status as status',
+            'house.description as description',
+            'house.amout_room as amout_room',
+            'house.amount_vacancy as amount_vacancy',
+            'house.amount_baths as amount_baths',
+            'address.street as street',
+            'address.postal_code as postal_code',
+            'address.district as district',
+            'address.state as state',
+            'address.number as number',
+            'address.country as country',
+            'address.complement as complement',
+            'address.city as city',
+            'photo.path as path'
+        ]);
+        $this->_join("user", "user.id", "house.id_user");
+        $this->_join("address", "house.id_address", "address.id");
+        $this->_join("photos", "photos.id_house", "house.id");
+        $this->_join("photo", "photo.id", "photos.id_photo");
+        return $this->_fetch();
     }
-    public function fetch_house_by_id($houseId)
+    public function filterHouse($filters)
     {
-        $selectQuery = $this->select();
-        $selectQuery .= $this->where("id", $houseId);
-
-        $stm = $this->prepare($selectQuery);
-        $result = $this->execute($stm);
-
-        if ($stm->rowCount() > 0) {
-            return $stm->fetchAll(PDO::FETCH_ASSOC);
-        } else {
-            return [];
+        $this->_select($this->table, [
+            'house.id as house_id',
+            'address.id as address_id',
+            'user.id as user_id',
+            'house.house_type as house_type',
+            'house.contract_type as contract_type',
+            'house.price as price',
+            'house.status as status',
+            'house.description as description',
+            'house.amout_room as amout_room',
+            'house.amount_vacancy as amount_vacancy',
+            'house.amount_baths as amount_baths',
+            'address.street as street',
+            'address.postal_code as postal_code',
+            'address.district as district',
+            'address.state as state',
+            'address.number as number',
+            'address.country as country',
+            'address.complement as complement',
+            'address.city as city',
+            'photo.path as path'
+        ]);
+        $this->_join("user", "user.id", "house.id_user");
+        $this->_join("address", "house.id_address", "address.id");
+        $this->_join("photos", "photos.id_house", "house.id");
+        $this->_join("photo", "photo.id", "photos.id_photo");
+        foreach ($filters as $filter) {
+            $this->_where($filter['column'], $filter['value']);
         }
+        return $this->_fetch();
     }
     public function fetch_house_all_informations()
     {
@@ -63,6 +98,23 @@ class House extends Database
         $houses = $stm->fetchAll(PDO::FETCH_ASSOC);
         return $this->fetch_house_photos($houses);
     }
+
+    // DEPRECATED
+    public function fetch_house_by_id($houseId)
+    {
+        $selectQuery = $this->select();
+        $selectQuery .= $this->where("id", $houseId);
+
+        $stm = $this->prepare($selectQuery);
+        $result = $this->execute($stm);
+
+        if ($stm->rowCount() > 0) {
+            return $stm->fetchAll(PDO::FETCH_ASSOC);
+        } else {
+            return [];
+        }
+    }
+
 
     public function fetch_by_id($house_id)
     {
@@ -138,6 +190,29 @@ class House extends Database
         return $newArrHouse;
     }
 
+    public function filter_houses($filters)
+    {
+        // $newArr = [];
+        // $selectQuery = $this->select($this->_select_communs);
+        // $selectQuery .= $this->join("address", "id_address", "id", "=");
+        // $selectQuery .= $this->join("user", "id_user", "id", "=");
+
+        // for ($i = 0; $i <= count($filters); $i++) {
+
+        //     if ($i)
+        //         $selectQuery .= $this->where($filter['column'], $filter['value']);
+        // }
+
+        // $stm = $this->prepare($selectQuery);
+        // print_r($stm->rowCount());
+        // if ($stm->rowCount() <= 0) {
+        //     return [];
+        // }
+        // $houses = $stm->fetchAll(PDO::FETCH_ASSOC);
+
+        // responseArr($houses);
+    }
+
     // INSERT
     public function insertHouse($house)
     {
@@ -197,6 +272,6 @@ class House extends Database
         'address.country as country',
         'address.complement as complement',
         'address.city as city',
-        // 'photo.path as path'
+        'photo.path as path'
     ];
 }
