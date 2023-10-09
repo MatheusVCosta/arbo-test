@@ -158,8 +158,10 @@ E por fim, mas não menos importante, a tela de edição e remoção do anúncio
 </div>
 Em todas as telas eu desenvolvi pensando em manter um padrão de design, tentando seguir uma paleta de cores que fosse agradável e nada extravagante
 * "Usei como reférencia outros sites do ramo de imóveis para me basear no meu design" *
-![image](https://github.com/MatheusVCosta/arbo-test/assets/38003078/6dda2beb-a23d-4c3f-83e6-b21a3a63046d)
 
+<div align="center">
+    <img src="https://github.com/MatheusVCosta/arbo-test/assets/38003078/6dda2beb-a23d-4c3f-83e6-b21a3a63046d" width="500px"/>
+</div>
 ### Banco de dados 
 
 Sobre o banco de dados não tenho muito o que falar, usei somente 5 tabelas para armazenar as informações e não tem nada de especial
