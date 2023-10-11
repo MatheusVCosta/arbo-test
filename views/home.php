@@ -41,7 +41,7 @@
                         <div class="content mg-1 flex-1">
                             <label for="txtQtdRooms" class="form-label">Quarto</label>
                             <select class="input-text" id="txtQtdRooms" style="background-color:#fff;">
-                                <?php for ($i = 1; $i <= 4; $i++) { ?>
+                                <?php for ($i = 0; $i <= 4; $i++) { ?>
                                     <option value="<?= $i ?>">
                                         <?php echo $i ?>
                                     </option>
@@ -51,7 +51,7 @@
                         <div class="content mg-1 flex-1">
                             <label for="txtQtdBaths" class="form-label">Banheiro</label>
                             <select class="input-text" id="txtQtdBaths" style="background-color:#fff;">
-                                <?php for ($i = 1; $i <= 4; $i++) { ?>
+                                <?php for ($i = 0; $i <= 4; $i++) { ?>
                                     <option value="<?= $i ?>">
                                         <?php echo $i ?>
                                     </option>
@@ -61,7 +61,7 @@
                         <div class="content mg-1 flex-1">
                             <label for="txtQtdVacancy" class="form-label">Garagem</label>
                             <select class="input-text" id="txtQtdVacancy" style="background-color:#fff;">
-                                <?php for ($i = 1; $i <= 4; $i++) { ?>
+                                <?php for ($i = 0; $i <= 4; $i++) { ?>
                                     <option value="<?= $i ?>">
                                         <?php echo $i ?>
                                     </option>

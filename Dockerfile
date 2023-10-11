@@ -42,5 +42,4 @@ COPY --chown=www-data:www-data ./ .
 # COPY ./error.html /var/www/html/error.html
 
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
-
 # CMD [ "php", "./your-script.php" ]

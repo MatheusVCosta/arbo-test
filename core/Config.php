@@ -21,9 +21,9 @@ trait Config
     {
         $this->PROJECT_NAME = "Minha Casa Nova";
         $this->DB_NAME = "my_new_house";
-        $this->DB_USER = "root";
-        $this->DB_PASSWORD = "root";
-        $this->DB_HOST = "192.168.96.2";
+        $this->DB_USER = "user";
+        $this->DB_PASSWORD = "user";
+        $this->DB_HOST = "mysql";
 
         return $this;
     }

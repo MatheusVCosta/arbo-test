@@ -12,6 +12,9 @@ services:
     
     depends_on:
       - php
+    networks:
+        appNetwork:
+          ipv4_address: 172.24.2.3
   
   php:
     container_name: php
@@ -24,18 +27,35 @@ services:
       - ./:/var/www
     ports:
       - 9000:9000
-    depends_on:
-      - db
+    links:
+       - db:db
+    networks:
+        appNetwork:
+          ipv4_address: 172.24.2.1
 
   db:
     container_name: mysql
     image: mysql:latest
     environment:
       - MYSQL_DATABASE=my_new_house
-      - MYSQL_USER=root
-      - MYSQL_PASSWORD=root
+      - MYSQL_USER=user
+      - MYSQL_PASSWORD=user
       - MYSQL_ROOT_PASSWORD=root
     volumes:
       - "./database:/var/lib/mysql"
+      - ./dump:/docker-entrypoint-initdb.d
     ports:
       - 3306:3306
+    networks:
+      appNetwork:
+        ipv4_address: 172.24.2.2
+    
+    
+
+networks:
+    appNetwork:
+        driver: bridge
+        ipam:
+            driver: default
+            config:
+                - subnet: "172.24.2.0/16"

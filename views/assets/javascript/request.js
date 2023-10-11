@@ -150,8 +150,9 @@ function sendRequest(method, url, data) {
         data: data,
         success: (response) => {
             console.log(response)
-            $("#message").html(`<p style="color:green; font-size:20px">${response['message']}!</p>`)
-            // window.location = `/user_index`
+            window.location = `/user_index`
+            alert(response['message'])
+            
             
         },
         error: (response) => {
@@ -243,10 +244,12 @@ $('#btnLogin').click((e) => {
         url: `/user_auth`,
         data: data,
         success: function (response) {
-            window.location = `/user_index`
-        },
-        error: (response) => {
             console.log(response)
+            if (response['status'] == 403){
+                alert('Usuário não encontrado')
+                window.location = "/"
+            }
+            window.location = `/user_index`
         }
     })
 })

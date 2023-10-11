@@ -75,13 +75,11 @@ class User extends BasicORM
         if (empty($user)) {
             $ex = new Exception("Usuário ou senha invalido!", 403);
             return $ex;
-            exit;
         }
 
         if (!password_verify($password, $user['password'])) {
             $ex = new Exception("Usuário ou senha invalido!", 403);
             return $ex;
-            exit;
         }
 
         return  $user;

@@ -47,8 +47,7 @@ class UserController extends RenderView
                 "message" => "Usuário não inserido!",
                 "status_code" => 500,
             ];
-            response($response);
-            return response($response);
+            response($response, 500);
         } else {
             $response = [
                 "message" => "Usuário inserido com sucesso!",
@@ -56,8 +55,8 @@ class UserController extends RenderView
             ];
             $new_user = $this->user->fetchId($result);
             _create_auth_session(['id' => $new_user['id'], 'name' => $new_user['name'], 'email' => $new_user['email']]);
-            response($response);
-            exit;
+            response($response, 201);
+            return $response;
         }
 
         $this->loadView('user_home', [
@@ -66,8 +65,8 @@ class UserController extends RenderView
     }
 
     public function user_logout()
-    {
-        if ($_SESSION['user_authenticated']) {
+    {   
+        if (isset($_SESSION['user_authenticated'])) {
             _destroy_session('user_authenticated');
         }
         header('Location: /');

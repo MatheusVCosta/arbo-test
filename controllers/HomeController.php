@@ -8,7 +8,6 @@ class HomeController extends RenderView
 
         $house = new House();
         $houses = $house->all();
-        // $d = $house->getPhotos();
         $config = $this->get_sentings();
         $this->loadView('home', [
             'config'  => $config,
@@ -39,13 +38,12 @@ class HomeController extends RenderView
             ['column' => 'house.amount_vacancy', 'value' =>  $qtdVacancy, "operator" => ">="],
 
         ]);
-        if ($houses) {
-            $this->loadView('template/mainHome', [
-                'title'   => 'Home',
-                'houses' => $houses
 
-            ]);
-            return true;
-        }
+        // responseArr($house);
+        $this->loadView('template/mainHome', [
+            'title'   => 'Home',
+            'houses' => $houses
+
+        ]);
     }
 }

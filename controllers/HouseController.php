@@ -103,7 +103,7 @@ class HouseController extends RenderView
             $this->addPhotoHouse($houseResponse);
 
             response([
-                'message' => "House criada com sucesso",
+                'message' => "Imóvel criada com sucesso",
                 'status'  => 200
             ]);
         } else {

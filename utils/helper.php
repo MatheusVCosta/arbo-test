@@ -77,9 +77,9 @@ function _exception_response_json($ex, $args = [])
     exit;
 }
 
-function response($args = [])
+function response($args = [], $code = 200)
 {
-    http_response_code(200);
+    http_response_code($code);
     header('Content-type: application/json');
     print_r(json_encode($args));
     exit;
