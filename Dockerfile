@@ -26,20 +26,18 @@ RUN apt-get update && apt-get install -y \
     && docker-php-ext-configure gd --with-freetype --with-jpeg\
     && docker-php-ext-install -j$(nproc) gd
 
-# RUN docker-php-ext-install mysqli pdo pdo_mysql && docker-php-ext-enable pdo_mysql
-
 COPY ./php.ini /etc/php8/php-fpm.d/www.conf
 
 WORKDIR $APP_DIR
 RUN cd $APP_DIR
+
+# copy root path for docker
+COPY ./ $APP_DIR
+# apply permission in public folder for save images when save in "HouseController"
+RUN chmod -R 755 /var/www/public
 RUN chown www-data:www-data $APP_DIR
+
 
 COPY --chown=www-data:www-data ./ .
 
-# RUN apt-get install nginx -y
-# RUN rm -rf /etc/nginx/sites-enabled/* && rm -rf /etc/nginx/sites-available/*
-# COPY ./sites.conf /etc/nginx/sites-enabled/default.conf
-# COPY ./error.html /var/www/html/error.html
-
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
-# CMD [ "php", "./your-script.php" ]

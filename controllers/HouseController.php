@@ -195,7 +195,8 @@ class HouseController extends RenderView
         $photo = new Photo();
         $photos = $_POST['photos_upload'][0];
         $photosSaved = [];
-
+        print_r($_POST['photos_upload']);
+        die;
         foreach ($photos as $justPhoto) {
             $justPhoto = $photo->setArrayForPhoto(["`path`" => $justPhoto]);
             $photoSave = $photo->insertPhoto($justPhoto);

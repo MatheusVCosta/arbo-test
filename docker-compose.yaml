@@ -19,7 +19,6 @@ services:
   php:
     container_name: php
     build:
-      context: .
       dockerfile: ./Dockerfile
       args:
         PHP_VERSION: '8.2.4-fpm-bullseye'
@@ -42,7 +41,7 @@ services:
       - MYSQL_PASSWORD=user
       - MYSQL_ROOT_PASSWORD=root
     volumes:
-      - "./database:/var/lib/mysql"
+      - ./database:/var/lib/mysql
       - ./dump:/docker-entrypoint-initdb.d
     ports:
       - 3306:3306

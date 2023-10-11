@@ -152,8 +152,8 @@ function sendRequest(method, url, data) {
             console.log(response)
             window.location = `/user_index`
             alert(response['message'])
-            
-            
+
+
         },
         error: (response) => {
             console.log('erro')
@@ -245,7 +245,7 @@ $('#btnLogin').click((e) => {
         data: data,
         success: function (response) {
             console.log(response)
-            if (response['status'] == 403){
+            if (response['status'] == 403) {
                 alert('Usuário não encontrado')
                 window.location = "/"
             }
