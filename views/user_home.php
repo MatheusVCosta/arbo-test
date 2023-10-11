@@ -1,6 +1,6 @@
 <?php
 if (!isset($_SESSION['user_authenticated'])) {
-    header('Location: /test-arbo/arbo-test');
+    header('Location: /');
 }
 ?>
 <html>
@@ -63,7 +63,7 @@ if (!isset($_SESSION['user_authenticated'])) {
 <script src="views/assets/javascript/request.js"></script>
 <script>
     let openEditHOuse = (house_id) => {
-        window.location = `${url_base}/renderInsertHouse?house_id=${house_id}&page_mode=edit`
+        window.location = `/renderInsertHouse?house_id=${house_id}&page_mode=edit`
     }
 </script>
 

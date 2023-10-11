@@ -57,7 +57,7 @@ Ex:
         public function index()
         {
             if (!isset($_SESSION['user_authenticated'])) {
-                header('Location: /test-arbo/arbo-test');
+                header('Location: /');
             }
             $actual_user = $_SESSION['user_authenticated'];
             $config = $this->get_sentings();
@@ -192,7 +192,7 @@ Muito obrigado, e até mais :D
 ### Como iniciar o projeto
 Hoje eu ainda irei tentar colocar no ar para testarem, mas caso queiram clonar o repositório
 Eu usei o servido Apache no Linux, para abrir no localhost basta colocar em /var/www/html/
-E acessar http://localhost/test-arbo/arbo-test/
+E acessar http://localhost//
 
 E para o banco de dados basta rodar o script mysql_dumo.sql que esta no repositório que já vai criar todas as tabelas e o banco
 Configurando as variaveis de ambieira em /core/Config.php

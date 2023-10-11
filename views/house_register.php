@@ -1,6 +1,6 @@
 <?php
 if (!isset($_SESSION['user_authenticated'])) {
-    header('Location: /test-arbo/arbo-test');
+    header('Location: /');
 }
 
 ?>

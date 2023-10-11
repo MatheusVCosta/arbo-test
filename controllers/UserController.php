@@ -8,7 +8,7 @@ class UserController extends RenderView
     public function index()
     {
         if (!isset($_SESSION['user_authenticated'])) {
-            header('Location: /test-arbo/arbo-test');
+            header('Location: /');
         }
 
         $actual_user = $_SESSION['user_authenticated'];
@@ -30,7 +30,7 @@ class UserController extends RenderView
         $this->user = new User();
 
         if (empty($_POST)) {
-            header('Location: /test-arbo/arbo-test');
+            header('Location: /');
         }
         $data  = $_POST;
 
@@ -70,7 +70,7 @@ class UserController extends RenderView
         if ($_SESSION['user_authenticated']) {
             _destroy_session('user_authenticated');
         }
-        header('Location: /test-arbo/arbo-test');
+        header('Location: /');
     }
 
 
@@ -99,7 +99,7 @@ class UserController extends RenderView
     public function user_auth()
     {
         if (empty($_POST)) {
-            header('Location: /test-arbo/arbo-test');
+            header('Location: /');
         }
 
         $config = $this->get_sentings();

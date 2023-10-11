@@ -1,6 +1,6 @@
+
 // const { json } = require("stream/consumers");
 
-const url_base = "/test-arbo/arbo-test";
 const message_erros = {
     'type_error': {
         'field_null': "O campo '?' precisa ser preenchido"
@@ -15,7 +15,7 @@ $("#file").change((e) => {
     form = $('#formFiles')[0]
     formData = new FormData(form)
     $.ajax({
-        url: `${url_base}/house_save_photo`,
+        url: `/house_save_photo`,
         type: "POST",
         data: formData,
         processData: false,
@@ -42,7 +42,7 @@ function editHouse(page_mode, house_id) {
     elements = this.getElementsForm()
     formIsValid = validElementsForm(elements, page_mode)
     if (formIsValid == true) {
-        url = `${url_base}/house_edit?house_id=${house_id}`
+        url = `/house_edit?house_id=${house_id}`
         sendRequest("POST", url, elements)
     } else {
 
@@ -53,7 +53,7 @@ function crateHouse(page_mode) {
     elements = this.getElementsForm()
     formIsValid = validElementsForm(elements, page_mode)
     if (formIsValid == true) {
-        sendRequest("POST", `${url_base}/house_insert`, elements)
+        sendRequest("POST", `/house_insert`, elements)
     }
 }
 
@@ -150,8 +150,9 @@ function sendRequest(method, url, data) {
         data: data,
         success: (response) => {
             console.log(response)
-            window.location = `${url_base}/user_index`
             $("#message").html(`<p style="color:green; font-size:20px">${response['message']}!</p>`)
+            // window.location = `/user_index`
+            
         },
         error: (response) => {
             console.log('erro')
@@ -164,11 +165,11 @@ function deleteHouse(houseId) {
     $("#message").html(``)
     $.ajax({
         type: 'GET',
-        url: `${url_base}/house_delete`,
+        url: `/house_delete`,
         data: { 'house_id': houseId },
         success: (response) => {
             alert(response['message'])
-            window.location = `${url_base}/user_index`
+            window.location = `/user_index`
         },
         error: (response) => {
             console.log(response)
@@ -189,7 +190,7 @@ function applyFilter() {
     }
     console.log(data);
     $.ajax({
-        url: `${url_base}/home_filter`,
+        url: `/home_filter`,
         type: "GET",
         data: data,
         success: (data) => {
@@ -216,10 +217,10 @@ $("#btnSend").click((e) => {
     }
     $.ajax({
         type: "POST",
-        url: `${url_base}/user_insert`,
+        url: `/user_insert`,
         data: data,
         success: function (response) {
-            window.location = `${url_base}/user_index`
+            window.location = `/user_index`
         },
         error: (response) => {
             console.log(response)
@@ -239,10 +240,10 @@ $('#btnLogin').click((e) => {
     }
     $.ajax({
         type: "POST",
-        url: `${url_base}/user_auth`,
+        url: `/user_auth`,
         data: data,
         success: function (response) {
-            window.location = `${url_base}/user_index`
+            window.location = `/user_index`
         },
         error: (response) => {
             console.log(response)
@@ -253,9 +254,9 @@ $('#btnLogin').click((e) => {
 $('#btnLogOut').click((e) => {
     $.ajax({
         type: "GET",
-        url: `${url_base}/user_logout`,
+        url: `/user_logout`,
         success: function (response) {
-            window.location = `${url_base} / `
+            window.location = ` / `
         },
         error: (response) => {
             console.log(response)

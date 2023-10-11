@@ -31,7 +31,7 @@ class Photo extends Database
 
     public function insert_photo_and_house($photo_id, $house_id)
     {
-        $insertQuery = "INSERT INTO my_new_house_db.`photos` (id_photo, id_house) VALUES (?,?)";
+        $insertQuery = "INSERT INTO photos (id_photo, id_house) VALUES (?,?)";
         $stm = $this->pdo->prepare($insertQuery);
         try {
             $result = $stm->execute([$photo_id, $house_id]);

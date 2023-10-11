@@ -20,10 +20,10 @@ trait Config
     public function get_sentings()
     {
         $this->PROJECT_NAME = "Minha Casa Nova";
-        $this->DB_NAME = "my_new_house_db";
+        $this->DB_NAME = "my_new_house";
         $this->DB_USER = "root";
-        $this->DB_PASSWORD = "7274";
-        $this->DB_HOST = "127.0.0.1";
+        $this->DB_PASSWORD = "root";
+        $this->DB_HOST = "192.168.96.2";
 
         return $this;
     }

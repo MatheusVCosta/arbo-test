@@ -4,17 +4,23 @@ class Core
 {
     public function run($routes)
     {
+        
         $url = '';
         $routerFound = false;
-        $url = isset($_GET['url']) ? $url . $_GET['url'] : $url;
+        if (isset($_SERVER['REQUEST_URI'])) {
+
+            str_contains($_SERVER['REQUEST_URI'], "?") ? [$url, $args] =  explode("?", $_SERVER['REQUEST_URI']) : $url = $_SERVER['REQUEST_URI'];
+        };
+
         $request_method = $_SERVER['REQUEST_METHOD'];
         ($url != '') ? $url = rtrim($url, '/') : $url;
 
-        $url_bakup = "/$url";
+        $url_bakup = "$url";
         if ($url == "") {
             $url_bakup = "/";
             $url = "home";
         }
+        
         foreach ($routes as $k => $v) {
             $pattern = '#^' . preg_replace('/{id}/', '(\w+)', $url) . '$#';
             if (preg_match($pattern, $url, $matches)) {

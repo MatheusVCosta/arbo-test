@@ -31,7 +31,7 @@
                             <button class="btn btn-orangepointer flex-2" id="btnLogin">Entrar</button>
                         </div>
                         <div class="row mg-t-2 center flex-2">
-                            <span class="mg-r-1"> Ainda não tem conta? </span><a class="color-orange" href="/test-arbo/arbo-test/user_register">Clique aqui</a>
+                            <span class="mg-r-1"> Ainda não tem conta? </span><a class="color-orange" href="/user_register">Clique aqui</a>
                         </div>
                     </form>
                 </div>

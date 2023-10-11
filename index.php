@@ -6,10 +6,10 @@ require_once __DIR__ . '/router/router.php';
 
 $load_template = "";
 session_start();
-// ini_set('display_errors', 1);
-// ini_set('display_startup_erros', 1);
-// error_reporting(E_ALL);
-define('SITE_ROOT', realpath(dirname(__FILE__)));
+ini_set('display_errors', 1);
+ini_set('display_startup_erros', 1);
+error_reporting(E_ALL);
+// define('SITE_ROOT', $_REQUEST['REQUEST_URI']);
 // header('Content-type: application/json');
 
 spl_autoload_register(function ($file) {

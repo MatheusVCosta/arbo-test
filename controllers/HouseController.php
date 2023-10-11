@@ -69,7 +69,7 @@ class HouseController extends RenderView
                 'status'  => 200
             ]);
         } else {
-            header('Location: /test-arbo/arbo-test');
+            header('Location: /');
         }
     }
 
@@ -107,7 +107,7 @@ class HouseController extends RenderView
                 'status'  => 200
             ]);
         } else {
-            header('Location: /test-arbo/arbo-test');
+            header('Location: /');
         }
     }
 
