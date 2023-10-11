@@ -197,9 +197,10 @@ E acessar http://localhost//
 
 Edit:
     Encontrei um jeito melhor de iniciar o projeto, adicionei um docker-compose para criar containers com o projeto funcionando
+    
     Para usar é muito simples, basta rodar no terminal "docker-compose up --build"
     Assim será criado a imagem com os containers necessários para a aplicação funcionar
-
+    * Ah caso esteja rodando linux, não esqueça de usar o sudo no começo "sudo docker-compose up --build"
     E Logo que os containers estiverem rodando, basta acessar https://docker.localhost
 
 
