@@ -33,6 +33,44 @@ class HouseController extends RenderView
         ]);
     }
 
+    public function insert()
+    {
+        if ($_SESSION['user_authenticated']) {
+            $actualUser = $_SESSION['user_authenticated'];
+
+            $house = new House();
+            $address = new Address();
+
+            // Address 
+            $addressArray = $this->getAddress();
+            $addressArray = prepareArrayForDatabase($addressArray, $address->field_rule);
+            $addressResponse = $address->insertAddress($addressArray);
+            if (!$addressResponse) {
+                throw new Exception("Address not created");
+                exit;
+            }
+
+            // House
+            $houseArray = $this->getHouse($addressResponse, $actualUser);
+            $houseArray = prepareArrayForDatabase($houseArray, $house->field_rule);
+            $houseResponse = $house->insertHouse($houseArray);
+            if (!$houseResponse) {
+                throw new Exception("House not created");
+                exit;
+            }
+
+            // Photo
+            $this->addPhotoHouse($houseResponse);
+
+            response([
+                'message' => "Imóvel criada com sucesso",
+                'status'  => 200
+            ]);
+        } else {
+            header('Location: /');
+        }
+    }
+
     public function update()
     {
         if ($_SESSION['user_authenticated']) {
@@ -73,43 +111,6 @@ class HouseController extends RenderView
         }
     }
 
-    public function insert()
-    {
-        if ($_SESSION['user_authenticated']) {
-            $actualUser = $_SESSION['user_authenticated'];
-
-            $house = new House();
-            $address = new Address();
-
-            // Address 
-            $addressArray = $this->getAddress();
-            $addressArray = prepareArrayForDatabase($addressArray, $address->field_rule);
-            $addressResponse = $address->insertAddress($addressArray);
-            if (!$addressResponse) {
-                throw new Exception("Address not created");
-                exit;
-            }
-
-            // House
-            $houseArray = $this->getHouse($addressResponse, $actualUser);
-            $houseArray = prepareArrayForDatabase($houseArray, $house->field_rule);
-            $houseResponse = $house->insertHouse($houseArray);
-            if (!$houseResponse) {
-                throw new Exception("House not created");
-                exit;
-            }
-
-            // Photo
-            $this->addPhotoHouse($houseResponse);
-
-            response([
-                'message' => "Imóvel criada com sucesso",
-                'status'  => 200
-            ]);
-        } else {
-            header('Location: /');
-        }
-    }
 
     public function delete()
     {
@@ -158,7 +159,7 @@ class HouseController extends RenderView
             }
         }
 
-        response($new_path);
+        // response($new_path);
     }
 
     private function getAddress()
@@ -195,8 +196,6 @@ class HouseController extends RenderView
         $photo = new Photo();
         $photos = $_POST['photos_upload'][0];
         $photosSaved = [];
-        print_r($_POST['photos_upload']);
-        die;
         foreach ($photos as $justPhoto) {
             $justPhoto = $photo->setArrayForPhoto(["`path`" => $justPhoto]);
             $photoSave = $photo->insertPhoto($justPhoto);

@@ -1,4 +1,10 @@
 
 # igonore upload folder
-/public/upload/*
-/database
+public/upload/*
+database/*
+
+database/*.pem
+database/ca.pem
+database/client-cert.pem
+database/public_key.pem
+database/server-cert.pem
